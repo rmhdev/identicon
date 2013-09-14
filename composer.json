@@ -1,0 +1,29 @@
+{
+    "name": "rmhdev/identicon",
+    "description": "Identicon generator",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Rober Martín H",
+            "email": "rmh.dev@gmail.com",
+            "homepage": "http://rmhdev.net",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.3",
+        "silex/silex": "1.*",
+        "imagine/imagine": "0.5.*",
+        "monolog/monolog": ">=1.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Identicon": "src/"
+        }
+    }
+
+}
