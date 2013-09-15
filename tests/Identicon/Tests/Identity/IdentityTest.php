@@ -48,4 +48,22 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $identity->getPosition($posX, $posY);
     }
 
+    public function testIdentitiesFromDifferentInputs()
+    {
+        $identity1 = new Identity("myidentity");
+        $identity2 = new Identity("youridentity");
+        $equal = $identity1->__toString() !==  $identity2->__toString();
+
+        $this->assertTrue($equal);
+    }
+
+    public function testSymmetricOutput()
+    {
+        $identity = new Identity("myidentity");
+        $block00 = $identity->getPosition(0, 0);
+        $block04 = $identity->getPosition(0, 4);
+
+        $this->assertEquals($block00->isColored(), $block04->isColored());
+    }
+
 }

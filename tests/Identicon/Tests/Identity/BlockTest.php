@@ -15,4 +15,13 @@ class BlockTest extends \PHPUnit_Framework_TestCase
         $blockColored = new Block(true);
         $this->assertEquals(true, $blockColored->isColored());
     }
+
+    public function testBlockToString()
+    {
+        $blockNotColored = new Block(false);
+        $this->assertEquals(" ", $blockNotColored->__toString());
+
+        $blockColored = new Block(true);
+        $this->assertEquals("#", $blockColored->__toString());
+    }
 }

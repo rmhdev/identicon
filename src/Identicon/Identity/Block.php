@@ -15,4 +15,9 @@ class Block
     {
         return $this->isColored;
     }
+
+    public function __toString()
+    {
+        return $this->isColored() ? "#" : " ";
+    }
 }
