@@ -8,4 +8,9 @@ class Identity
     {
         return 5;
     }
+
+    public function getPosition($posX, $posY)
+    {
+        return new Block();
+    }
 }
