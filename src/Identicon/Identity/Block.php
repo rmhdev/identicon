@@ -4,5 +4,15 @@ namespace Identicon\Identity;
 
 class Block
 {
+    protected $isColored;
 
+    public function __construct($isColored = false)
+    {
+        $this->isColored = $isColored;
+    }
+
+    public function isColored()
+    {
+        return $this->isColored;
+    }
 }
