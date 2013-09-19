@@ -52,9 +52,9 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
     {
         $identity1 = new Identity("myidentity");
         $identity2 = new Identity("youridentity");
-        $equal = $identity1->__toString() !==  $identity2->__toString();
+        $equalIdentities = $identity1->__toString() ===  $identity2->__toString();
 
-        $this->assertTrue($equal);
+        $this->assertFalse($equalIdentities);
     }
 
     public function testSymmetricOutput()

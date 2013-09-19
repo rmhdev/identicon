@@ -33,11 +33,12 @@ class Identity
 
     protected function createBlock($posX, $posY)
     {
-        // TODO: generate deterministic values.
-        $isColored = false;
-        if (($posX == 0) && ($this->identification[0] == "m")) {
-            $isColored = true;
+        if ($posY > $this->getLength() / 2) {
+            $posY = $this->getLength() - $posY - 1;
         }
+        $charPosition = $posX * $this->getLength() + $posY;
+        $hexdec = hexdec(substr(sha1($this->identification), $charPosition, 1));
+        $isColored = $hexdec >= 8  ? true : false;
 
         return new Block($isColored);
     }
@@ -53,7 +54,7 @@ class Identity
             throw new OutOfBoundsException();
         }
 
-        return new Block();
+        return $this->createBlock($posX, $posY);
     }
 
     protected function isOutOfBounds($posX, $posY)
