@@ -18,13 +18,13 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
     {
         $identity = new Identity("name");
 
-        $block00 = $identity->getPosition(0, 0);
+        $block00 = $identity->getBlock(0, 0);
         $this->assertInstanceOf("Identicon\Identity\Block", $block00);
 
-        $block22 = $identity->getPosition(2, 2);
+        $block22 = $identity->getBlock(2, 2);
         $this->assertInstanceOf("Identicon\Identity\Block", $block22);
 
-        $block44 = $identity->getPosition(4, 4);
+        $block44 = $identity->getBlock(4, 4);
         $this->assertInstanceOf("Identicon\Identity\Block", $block44);
     }
 
@@ -45,7 +45,7 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
     public function testIdentityGetOutOfBoundsPosition($posX, $posY)
     {
         $identity = new Identity("name");
-        $identity->getPosition($posX, $posY);
+        $identity->getBlock($posX, $posY);
     }
 
     public function testIdentitiesFromDifferentInputs()
@@ -60,8 +60,8 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
     public function testSymmetricOutput()
     {
         $identity = new Identity("myidentity");
-        $block00 = $identity->getPosition(0, 0);
-        $block04 = $identity->getPosition(0, 4);
+        $block00 = $identity->getBlock(0, 0);
+        $block04 = $identity->getBlock(0, 4);
 
         $this->assertEquals($block00->isColored(), $block04->isColored());
     }
