@@ -57,13 +57,32 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($equalIdentities);
     }
 
-    public function testSymmetricOutput()
+    public function symmetricOutputProvider()
+    {
+        return array(
+            array(0, 0, 0, 4),
+            array(0, 1, 0, 3),
+            array(1, 0, 1, 4),
+            array(1, 1, 1, 3),
+            array(2, 0, 2, 4),
+            array(2, 1, 2, 3),
+            array(3, 0, 3, 4),
+            array(3, 1, 3, 3),
+            array(4, 0, 4, 4),
+            array(4, 1, 4, 3),
+        );
+    }
+
+    /**
+     * @dataProvider symmetricOutputProvider
+     */
+    public function testSymmetricOutput($leftX, $leftY, $rightX, $rightY)
     {
         $identity = new Identity("myidentity");
-        $block00 = $identity->getBlock(0, 0);
-        $block04 = $identity->getBlock(0, 4);
 
-        $this->assertEquals($block00->isColored(), $block04->isColored());
+        $blockLeft = $identity->getBlock($leftX, $leftY);
+        $blockRight = $identity->getBlock($rightX, $rightY);
+        $this->assertEquals($blockLeft->isColored(), $blockRight->isColored());
     }
 
 }
