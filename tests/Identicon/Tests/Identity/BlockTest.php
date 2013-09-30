@@ -3,7 +3,6 @@
 namespace Identicon\Tests\Identity;
 
 use Identicon\Identity\Block;
-use Imagine\Image\Color;
 
 class BlockTest extends \PHPUnit_Framework_TestCase
 {
