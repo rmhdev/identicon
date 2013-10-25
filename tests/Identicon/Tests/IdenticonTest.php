@@ -36,5 +36,6 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         $image = $imagine->open($filename);
         $this->assertEquals(420, $image->getSize()->getWidth());
         $this->assertEquals(420, $image->getSize()->getHeight());
+        unlink($filename);
     }
 }
