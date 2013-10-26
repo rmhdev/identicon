@@ -2,6 +2,7 @@
 
 namespace Identicon;
 
+use Identicon\Exception\InvalidArgumentException;
 use Identicon\Identity\Identity;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
@@ -38,11 +39,19 @@ class Identicon
         if (!isset($options["margin"])) {
             $options["margin"] = self::MARGIN;
         }
-        if (!isset($options["background-color"])) {
-            $options["background-color"] = self::BACKGROUND_COLOR;
+        if ((!is_int($options["margin"])) || ($options["margin"] < 0)) {
+            throw new InvalidArgumentException("Negative margins are not allowed");
         }
         if (!isset($options["block-size"])) {
             $options["block-size"] = self::BLOCK_SIZE;
+        }
+        try {
+            if (!isset($options["background-color"])) {
+                $options["background-color"] = self::BACKGROUND_COLOR;
+            }
+            $color = new Color($options["background-color"]);
+        } catch (\Imagine\Exception\InvalidArgumentException $e) {
+            throw new InvalidArgumentException($e);
         }
 
         return $options;
@@ -63,11 +72,17 @@ class Identicon
 
     protected function createImage()
     {
-        $size = ($this->getOption("margin") * 2) + ($this->getIdentity()->getLength() * $this->getOption("block-size"));
+        $size = $this->calculateSize();
         $imagine = new Imagine();
         $box = new Box($size, $size);
 
         return $imagine->create($box, $this->getBackgroundColor());
+    }
+
+    protected function calculateSize()
+    {
+        return ($this->getOption("margin") * 2) +
+            ($this->getIdentity()->getLength() * $this->getOption("block-size"));
     }
 
     protected function getOption($name)
