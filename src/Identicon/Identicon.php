@@ -18,21 +18,31 @@ class Identicon
     protected
         $identity,
         $image,
-        $backgroundColor,
-        $margin;
+        $options;
 
     protected static $colorPalette = array(
         "AE6A5B", "AE945B", "9FAE5B", "75AE5B", "5BAE6A", "5BAE94", "5B9FAE", "5B75AE",
         "6A5BAE", "945BAE", "AE5B9F", "AE5B75", "C28F84", "D7B5AD", "84B7C2", "#555555"
     );
 
-    public function __construct($value, $backgroundColor = NULL, $margin = NULL)
+    public function __construct($value, $options = array())
     {
+        $this->options = $this->processOptions($options);
         $this->identity = new Identity($value);
-        $this->backgroundColor = $backgroundColor ? $backgroundColor : self::BACKGROUND_COLOR;
-        $this->margin = is_null($margin) ? self::MARGIN : $margin;
         $this->image = $this->createImage();
         $this->drawIdentity();
+    }
+
+    protected function processOptions($options = array())
+    {
+        if (!isset($options["margin"])) {
+            $options["margin"] = self::MARGIN;
+        }
+        if (!isset($options["background-color"])) {
+            $options["background-color"] = self::BACKGROUND_COLOR;
+        }
+
+        return $options;
     }
 
     /**
@@ -50,16 +60,25 @@ class Identicon
 
     protected function createImage()
     {
-        $size = $this->margin * 2 + $this->getIdentity()->getLength() * self::BLOCK_SIZE;
+        $size = $this->getOption("margin") * 2 + $this->getIdentity()->getLength() * self::BLOCK_SIZE;
         $imagine = new Imagine();
         $box = new Box($size, $size);
 
         return $imagine->create($box, $this->getBackgroundColor());
     }
 
+    protected function getOption($name)
+    {
+        if (!isset($this->options[$name])) {
+            return NULL;
+        }
+
+        return $this->options[$name];
+    }
+
     public function getBackgroundColor()
     {
-        return new Color($this->backgroundColor);
+        return new Color($this->getOption("background-color"));
     }
 
     protected function drawIdentity()
@@ -85,8 +104,9 @@ class Identicon
 
     protected function calculatePolygonCoordinates($x, $y)
     {
-        $startX = self::MARGIN + self::BLOCK_SIZE * $y;
-        $startY = self::MARGIN + self::BLOCK_SIZE * $x;
+        $margin = $this->getOption("margin");
+        $startX = $margin + self::BLOCK_SIZE * $y;
+        $startY = $margin + self::BLOCK_SIZE * $x;
         return array(
             new Point($startX, $startY),
             new Point($startX + self::BLOCK_SIZE, $startY),

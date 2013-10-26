@@ -92,7 +92,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
     public function testPersonalizedBackgroundColor()
     {
-        $identicon = new Identicon("myidentity", "5f0963");
+        $identicon = new Identicon("myidentity", array("background-color" => "5f0963"));
         $backgroundColor = $identicon->getBackgroundColor();
         $this->assertEquals("#5f0963", (string) $backgroundColor);
 
@@ -105,7 +105,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
     public function testPersonalizedMargin()
     {
-        $identicon = new Identicon("myidentity", NULL, 10);
+        $identicon = new Identicon("myidentity", array("margin" => 10));
         $expectedWidth = 10*2 + $identicon->getIdentity()->getLength()*Identicon::BLOCK_SIZE;
         $this->assertEquals($expectedWidth, $identicon->getWidth());
 
