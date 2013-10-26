@@ -26,15 +26,13 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
     public function testGetContentGeneratesImage()
     {
         $identicon = new Identicon("myidentity");
-        $filename = sprintf("%s/%s.%s", sys_get_temp_dir(), uniqid("identicon-test-"), "png");
-        file_put_contents($filename, $identicon->getContent());
+        $filename = $this->createFile($identicon);
         $this->assertFileExists($filename);
 
         $mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filename);
         $this->assertEquals("image/png", $mimeType);
 
-        $imagine = new Imagine();
-        $image = $imagine->open($filename);
+        $image = $this->createImage($filename);
         $this->assertEquals(420, $image->getSize()->getWidth());
         $this->assertEquals(420, $image->getSize()->getHeight());
         unlink($filename);
@@ -43,28 +41,38 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
     public function testGetContentDrawsIdentityInImage()
     {
         $identicon = new Identicon("myidentity");
+        $image = $this->createImage($this->createFile($identicon));
+
+        $length = $identicon->getIdentity()->getLength();
+        for ($x = 0; $x < $length; $x++) {
+            for ($y = 0; $y < $length; $y++) {
+                $backgroundColor = '#' . Identicon::BACKGROUND_COLOR;
+                $centerX = Identicon::MARGIN + $y*Identicon::BLOCK_SIZE + Identicon::BLOCK_SIZE/2;
+                $centerY = Identicon::MARGIN + $x*Identicon::BLOCK_SIZE + Identicon::BLOCK_SIZE/2;
+                $color = $image->getColorAt(new Point($centerX, $centerY));
+                $comment = "position [{$x}, {$y}]: {$centerX}px, {$centerY}px";
+                if ($identicon->getIdentity()->getBlock($x, $y)->isColored()) {
+                    $this->assertNotEquals($backgroundColor, (string) $color, $comment);
+                } else {
+                    $this->assertEquals($backgroundColor, (string) $color, $comment);
+                }
+            }
+        }
+        unlink($filename);
+    }
+
+    protected function createFile(Identicon $identicon)
+    {
         $filename = sprintf("%s/%s.%s", sys_get_temp_dir(), uniqid("identicon-test-"), "png");
         file_put_contents($filename, $identicon->getContent());
+
+        return $filename;
+    }
+
+    protected function createImage($filename)
+    {
         $imagine = new Imagine();
-        $image = $imagine->open($filename);
-
-        $isColored = $identicon->getIdentity()->getBlock(0, 0)->isColored();
-        $expectedHexColor = $isColored ? "#555555" : "#ffffff";
-        $color = $image->getColorAt(new Point(65, 65));
-        $this->assertEquals($expectedHexColor, (string) $color);
-
-        $isColored = $identicon->getIdentity()->getBlock(0, 1)->isColored();
-        $expectedHexColor = $isColored ? "#555555" : "#ffffff";
-        $color = $image->getColorAt(new Point(100, 65));
-        $this->assertEquals($expectedHexColor, (string) $color);
-
-        $isColored = $identicon->getIdentity()->getBlock(0, 2)->isColored();
-        $expectedHexColor = $isColored ? "#555555" : "#ffffff";
-        $color = $image->getColorAt(new Point(135, 65));
-        $this->assertEquals($expectedHexColor, (string) $color);
-
-
-
+        return $imagine->open($filename);
     }
 
 }
