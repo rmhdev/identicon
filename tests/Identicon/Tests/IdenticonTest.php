@@ -41,7 +41,8 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
     public function testGetContentDrawsIdentityInImage()
     {
         $identicon = new Identicon("myidentity");
-        $image = $this->createImage($this->createFile($identicon));
+        $filename = $this->createFile($identicon);
+        $image = $this->createImage($filename);
 
         $length = $identicon->getIdentity()->getLength();
         for ($x = 0; $x < $length; $x++) {
