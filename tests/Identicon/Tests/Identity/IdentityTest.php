@@ -2,7 +2,6 @@
 
 namespace Identicon\Tests\Identity;
 
-use Identicon\Exception\OutOfBoundsException;
 use Identicon\Identity\Identity;
 
 class IdentityTest extends \PHPUnit_Framework_TestCase

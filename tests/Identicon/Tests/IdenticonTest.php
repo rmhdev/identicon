@@ -47,7 +47,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         $length = $identicon->getIdentity()->getLength();
         for ($x = 0; $x < $length; $x++) {
             for ($y = 0; $y < $length; $y++) {
-                $backgroundColor = '#' . Identicon::BACKGROUND_COLOR;
+                $backgroundColor = (string) $identicon->getBackgroundColor();
                 $centerX = Identicon::MARGIN + $y*Identicon::BLOCK_SIZE + Identicon::BLOCK_SIZE/2;
                 $centerY = Identicon::MARGIN + $x*Identicon::BLOCK_SIZE + Identicon::BLOCK_SIZE/2;
                 $color = $image->getColorAt(new Point($centerX, $centerY));
@@ -88,6 +88,19 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         $backgroundColor = $identicon->getBackgroundColor();
         $this->assertInstanceOf("\Imagine\Image\Color", $backgroundColor);
         $this->assertStringEndsWith(Identicon::BACKGROUND_COLOR, (string) $backgroundColor);
+    }
+
+    public function testPersonalizedBackgroundColor()
+    {
+        $identicon = new Identicon("myidentity", "5f0963");
+        $backgroundColor = $identicon->getBackgroundColor();
+        $this->assertEquals("#5f0963", (string) $backgroundColor);
+
+        $filename = $this->createFile($identicon);
+        $image = $this->createImage($filename);
+        $actualBackgroundColor = $image->getColorAt(new Point(0, 0));
+        $this->assertEquals((string) $backgroundColor, (string) $actualBackgroundColor);
+        unlink($filename);
     }
 
 }

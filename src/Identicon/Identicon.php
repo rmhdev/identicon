@@ -17,16 +17,18 @@ class Identicon
 
     protected
         $identity,
-        $image;
+        $image,
+        $backgroundColor;
 
     protected static $colorPalette = array(
         "AE6A5B", "AE945B", "9FAE5B", "75AE5B", "5BAE6A", "5BAE94", "5B9FAE", "5B75AE",
         "6A5BAE", "945BAE", "AE5B9F", "AE5B75", "C28F84", "D7B5AD", "84B7C2", "#555555"
     );
 
-    public function __construct($value)
+    public function __construct($value, $backgroundColor = NULL)
     {
         $this->identity = new Identity($value);
+        $this->backgroundColor = $backgroundColor ? $backgroundColor : self::BACKGROUND_COLOR;
         $this->image = $this->createImage();
         $this->drawIdentity();
     }
@@ -54,7 +56,7 @@ class Identicon
 
     public function getBackgroundColor()
     {
-        return new Color(self::BACKGROUND_COLOR);
+        return new Color($this->backgroundColor);
     }
 
     protected function drawIdentity()
