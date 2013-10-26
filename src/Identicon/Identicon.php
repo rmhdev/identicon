@@ -39,22 +39,37 @@ class Identicon
         if (!isset($options["margin"])) {
             $options["margin"] = self::MARGIN;
         }
-        if ((!is_int($options["margin"])) || ($options["margin"] < 0)) {
-            throw new InvalidArgumentException("Negative margins are not allowed");
-        }
+        $this->checkValueNumeric($options["margin"]);
+
         if (!isset($options["block-size"])) {
             $options["block-size"] = self::BLOCK_SIZE;
         }
+        $this->checkValueNumeric($options["block-size"]);
+
+        if (!isset($options["background-color"])) {
+            $options["background-color"] = self::BACKGROUND_COLOR;
+        }
+        $this->checkValueBackgroundColor($options["background-color"]);
+
+        return $options;
+    }
+
+    protected function checkValueNumeric($value)
+    {
+        if ((!is_int($value)) || ($value < 0)) {
+            throw new InvalidArgumentException("Negative values are not allowed");
+        }
+        return $value;
+    }
+
+    protected function checkValueBackgroundColor($backgroundColor)
+    {
         try {
-            if (!isset($options["background-color"])) {
-                $options["background-color"] = self::BACKGROUND_COLOR;
-            }
-            $color = new Color($options["background-color"]);
+            $colorObject = new Color($backgroundColor);
         } catch (\Imagine\Exception\InvalidArgumentException $e) {
             throw new InvalidArgumentException($e);
         }
-
-        return $options;
+        return $backgroundColor;
     }
 
     /**
