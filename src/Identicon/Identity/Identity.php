@@ -89,7 +89,7 @@ class Identity
 
     public function __toString()
     {
-        $printedRows = array();
+        $printedRows = array($this->getCode());
         for ($x = 0; $x < $this->getLength(); $x++) {
             $printedRows[] = $this->printRow($x);
         }
@@ -107,7 +107,9 @@ class Identity
         return $row;
     }
 
-
-
+    public function getCode()
+    {
+        return substr($this->hash, strlen($this->hash) - 3, 3);
+    }
 
 }

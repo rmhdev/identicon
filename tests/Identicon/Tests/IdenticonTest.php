@@ -76,4 +76,18 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         return $imagine->open($filename);
     }
 
+    public function testGetColor()
+    {
+        $identicon = new Identicon("myidentity");
+        $this->assertInstanceOf("\Imagine\Image\Color", $identicon->getColor());
+    }
+
+    public function testGetBackgroundColor()
+    {
+        $identicon = new Identicon("myidentity");
+        $backgroundColor = $identicon->getBackgroundColor();
+        $this->assertInstanceOf("\Imagine\Image\Color", $backgroundColor);
+        $this->assertStringEndsWith(Identicon::BACKGROUND_COLOR, (string) $backgroundColor);
+    }
+
 }

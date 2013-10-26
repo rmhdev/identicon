@@ -85,4 +85,11 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($blockLeft->isColored(), $blockRight->isColored());
     }
 
+    public function testGetCode()
+    {
+        $identity = new Identity("myidentity");
+        $this->assertInternalType("string", $identity->getCode());
+        $this->assertEquals(3, strlen($identity->getCode()));
+    }
+
 }
