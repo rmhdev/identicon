@@ -11,24 +11,26 @@ use Imagine\Image\Point;
 class Identicon
 {
     const
-        MARGIN = 30,
+        MARGIN = 35,
         BLOCK_SIZE = 70,
         BACKGROUND_COLOR = "f0f0f0";
 
     protected
         $identity,
         $image,
-        $backgroundColor;
+        $backgroundColor,
+        $margin;
 
     protected static $colorPalette = array(
         "AE6A5B", "AE945B", "9FAE5B", "75AE5B", "5BAE6A", "5BAE94", "5B9FAE", "5B75AE",
         "6A5BAE", "945BAE", "AE5B9F", "AE5B75", "C28F84", "D7B5AD", "84B7C2", "#555555"
     );
 
-    public function __construct($value, $backgroundColor = NULL)
+    public function __construct($value, $backgroundColor = NULL, $margin = NULL)
     {
         $this->identity = new Identity($value);
         $this->backgroundColor = $backgroundColor ? $backgroundColor : self::BACKGROUND_COLOR;
+        $this->margin = is_null($margin) ? self::MARGIN : $margin;
         $this->image = $this->createImage();
         $this->drawIdentity();
     }
@@ -48,8 +50,9 @@ class Identicon
 
     protected function createImage()
     {
+        $size = $this->margin * 2 + $this->getIdentity()->getLength() * self::BLOCK_SIZE;
         $imagine = new Imagine();
-        $box = new Box(420, 420);
+        $box = new Box($size, $size);
 
         return $imagine->create($box, $this->getBackgroundColor());
     }
@@ -102,6 +105,16 @@ class Identicon
         $colorPalettePosition = hexdec($code[0]);
 
         return self::$colorPalette[$colorPalettePosition];
+    }
+
+    public function getWidth()
+    {
+        return $this->image->getSize()->getWidth();
+    }
+
+    public function getHeight()
+    {
+        return $this->image->getSize()->getHeight();
     }
 
 }

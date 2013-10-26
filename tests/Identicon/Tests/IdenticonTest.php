@@ -103,4 +103,14 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         unlink($filename);
     }
 
+    public function testPersonalizedMargin()
+    {
+        $identicon = new Identicon("myidentity", NULL, 10);
+        $expectedWidth = 10*2 + $identicon->getIdentity()->getLength()*Identicon::BLOCK_SIZE;
+        $this->assertEquals($expectedWidth, $identicon->getWidth());
+
+        $expectedHeight = $expectedWidth;
+        $this->assertEquals($expectedHeight, $identicon->getHeight());
+    }
+
 }
