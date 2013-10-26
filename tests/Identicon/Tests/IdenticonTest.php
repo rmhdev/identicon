@@ -4,6 +4,7 @@ namespace Identicon;
 
 use Identicon\Identity\Identity;
 use Imagine\Gd\Imagine;
+use Imagine\Image\Point;
 
 class IdenticonTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +23,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($identity->__toString(), $expectedIdentity->__toString());
     }
 
-    public function testGetContentDefaultSize()
+    public function testGetContentGeneratesImage()
     {
         $identicon = new Identicon("myidentity");
         $filename = sprintf("%s/%s.%s", sys_get_temp_dir(), uniqid("identicon-test-"), "png");
@@ -38,4 +39,32 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(420, $image->getSize()->getHeight());
         unlink($filename);
     }
+
+    public function testGetContentDrawsIdentityInImage()
+    {
+        $identicon = new Identicon("myidentity");
+        $filename = sprintf("%s/%s.%s", sys_get_temp_dir(), uniqid("identicon-test-"), "png");
+        file_put_contents($filename, $identicon->getContent());
+        $imagine = new Imagine();
+        $image = $imagine->open($filename);
+
+        $isColored = $identicon->getIdentity()->getBlock(0, 0)->isColored();
+        $expectedHexColor = $isColored ? "#555555" : "#ffffff";
+        $color = $image->getColorAt(new Point(65, 65));
+        $this->assertEquals($expectedHexColor, (string) $color);
+
+        $isColored = $identicon->getIdentity()->getBlock(0, 1)->isColored();
+        $expectedHexColor = $isColored ? "#555555" : "#ffffff";
+        $color = $image->getColorAt(new Point(100, 65));
+        $this->assertEquals($expectedHexColor, (string) $color);
+
+        $isColored = $identicon->getIdentity()->getBlock(0, 2)->isColored();
+        $expectedHexColor = $isColored ? "#555555" : "#ffffff";
+        $color = $image->getColorAt(new Point(135, 65));
+        $this->assertEquals($expectedHexColor, (string) $color);
+
+
+
+    }
+
 }
