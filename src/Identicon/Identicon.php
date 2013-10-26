@@ -158,7 +158,7 @@ class Identicon
     {
         $colorPalettePosition = hexdec($code[0]);
 
-        return self::$colorPalette[$colorPalettePosition];
+        return self::$colorPalette[$colorPalettePosition % sizeof(self::$colorPalette)];
     }
 
     public function getWidth()

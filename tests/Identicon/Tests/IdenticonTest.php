@@ -40,7 +40,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetContentDrawsIdentityInImage()
     {
-        $identicon = new Identicon("myidentity");
+        $identicon = new Identicon("probando");
         $filename = $this->createFile($identicon);
         $image = $this->createImage($filename);
 
@@ -59,7 +59,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
-        unlink($filename);
+        //unlink($filename);
     }
 
     protected function createFile(Identicon $identicon)
