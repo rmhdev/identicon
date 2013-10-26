@@ -59,7 +59,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
-        unlink($filename);
+        //unlink($filename);
     }
 
     protected function createFile(Identicon $identicon)
@@ -111,6 +111,13 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
         $expectedHeight = $expectedWidth;
         $this->assertEquals($expectedHeight, $identicon->getHeight());
+    }
+
+    public function testPersonalizedBLockSize()
+    {
+        $identicon = new Identicon("myIdentity", array("block-size" => 50));
+        $expectedWidth = Identicon::MARGIN*2  + $identicon->getIdentity()->getLength() * 50;
+        $this->assertEquals($expectedWidth, $identicon->getWidth());
     }
 
 }

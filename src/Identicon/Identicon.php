@@ -41,6 +41,9 @@ class Identicon
         if (!isset($options["background-color"])) {
             $options["background-color"] = self::BACKGROUND_COLOR;
         }
+        if (!isset($options["block-size"])) {
+            $options["block-size"] = self::BLOCK_SIZE;
+        }
 
         return $options;
     }
@@ -60,7 +63,7 @@ class Identicon
 
     protected function createImage()
     {
-        $size = $this->getOption("margin") * 2 + $this->getIdentity()->getLength() * self::BLOCK_SIZE;
+        $size = ($this->getOption("margin") * 2) + ($this->getIdentity()->getLength() * $this->getOption("block-size"));
         $imagine = new Imagine();
         $box = new Box($size, $size);
 
@@ -105,13 +108,14 @@ class Identicon
     protected function calculatePolygonCoordinates($x, $y)
     {
         $margin = $this->getOption("margin");
-        $startX = $margin + self::BLOCK_SIZE * $y;
-        $startY = $margin + self::BLOCK_SIZE * $x;
+        $blockSize = $this->getOption("block-size");
+        $startX = $margin + $blockSize * $y;
+        $startY = $margin + $blockSize * $x;
         return array(
             new Point($startX, $startY),
-            new Point($startX + self::BLOCK_SIZE, $startY),
-            new Point($startX + self::BLOCK_SIZE, $startY + self::BLOCK_SIZE),
-            new Point($startX, $startY + self::BLOCK_SIZE)
+            new Point($startX + $blockSize, $startY),
+            new Point($startX + $blockSize, $startY + $blockSize),
+            new Point($startX, $startY + $blockSize)
         );
     }
 
