@@ -48,8 +48,8 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         for ($x = 0; $x < $length; $x++) {
             for ($y = 0; $y < $length; $y++) {
                 $backgroundColor = (string) $identicon->getBackgroundColor();
-                $centerX = Identicon::MARGIN + $y*Identicon::BLOCK_SIZE + Identicon::BLOCK_SIZE/2;
-                $centerY = Identicon::MARGIN + $x*Identicon::BLOCK_SIZE + Identicon::BLOCK_SIZE/2;
+                $centerX = 30 + $y*70 + 70/2;
+                $centerY = 30 + $x*70 + 70/2;
                 $color = $image->getColorAt(new Point($centerX, $centerY));
                 $comment = "position [{$x}, {$y}]: {$centerX}px, {$centerY}px";
                 if ($identicon->getIdentity()->getBlock($x, $y)->isColored()) {
@@ -59,7 +59,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
-        //unlink($filename);
+        unlink($filename);
     }
 
     protected function createFile(Identicon $identicon)
@@ -103,21 +103,67 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         unlink($filename);
     }
 
+    /**
+     * @expectedException \Identicon\Exception\InvalidArgumentException
+     */
+    public function testIncorrectBackgroundColorThrowsException()
+    {
+        $identicon = new Identicon("myidentity", array("background-color" => "55"));
+    }
+
     public function testPersonalizedMargin()
     {
         $identicon = new Identicon("myidentity", array("margin" => 10));
-        $expectedWidth = 10*2 + $identicon->getIdentity()->getLength()*Identicon::BLOCK_SIZE;
+        $expectedWidth = 10*2 + 5*70;
         $this->assertEquals($expectedWidth, $identicon->getWidth());
 
         $expectedHeight = $expectedWidth;
         $this->assertEquals($expectedHeight, $identicon->getHeight());
     }
 
-    public function testPersonalizedBLockSize()
+    /**
+     * @dataProvider incorrectMarginValuesProvider
+     * @expectedException \Identicon\Exception\InvalidArgumentException
+     */
+    public function testIncorrectMarginThrowException($marginValue)
+    {
+        $identicon = new Identicon("myidentity", array("margin" => $marginValue));
+    }
+
+    public function incorrectMarginValuesProvider()
+    {
+        return array(
+            array(-5),
+            array("test"),
+            array("")
+        );
+    }
+
+    public function testPersonalizedBlockSize()
     {
         $identicon = new Identicon("myIdentity", array("block-size" => 50));
-        $expectedWidth = Identicon::MARGIN*2  + $identicon->getIdentity()->getLength() * 50;
+        $expectedWidth = 35*2 + 5*50;
         $this->assertEquals($expectedWidth, $identicon->getWidth());
+
+        $expectedHeight = $expectedWidth;
+        $this->assertEquals($expectedHeight, $identicon->getHeight());
+    }
+
+    /**
+     * @dataProvider incorrectBlockSizesValuesProvider
+     * @expectedException \Identicon\Exception\InvalidArgumentException
+     */
+    public function testIncorrectBlockSizeThrowException($blockSize)
+    {
+        $identicon = new Identicon("myidentity", array("block-size" => $blockSize));
+    }
+
+    public function incorrectBlockSizesValuesProvider()
+    {
+        return array(
+            array(-5),
+            array("test")
+        );
     }
 
 }
