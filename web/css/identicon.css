@@ -1,3 +1,14 @@
+body > .container {
+    margin-top: 40px;
+}
+
+.masthead h2 {
+    text-align: center;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 5px;
+}
+
+
 /* Footer
 -------------------------------------------------- */
 
@@ -23,3 +34,4 @@
 .footer-links li:first-child {
     padding-left: 0;
 }
+

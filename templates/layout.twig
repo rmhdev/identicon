@@ -9,16 +9,16 @@
     <title>Identicons</title>
 
     {% for asset in ['bootstrap.min.css', 'identicon.css'] %}
-    <link href="./css/{{ asset }}" rel="stylesheet">
+    <link href="/css/{{ asset }}" rel="stylesheet">
     {% endfor %}
 
     <!--[if lt IE 9]>
     {% for js in ['html5shiv.js', 'respond.min.js'] %}
-    <script src="./js/{{ js }}"></script>
+    <script src="/js/{{ js }}"></script>
     {% endfor %}
     <![endif]-->
 
-    <link rel="shortcut icon" href="./favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="./">Identicon</a>
+            <a class="navbar-brand" href="/">Identicon</a>
         </div>
     </div>
 </div>
