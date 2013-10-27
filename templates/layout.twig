@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A pet project for creating identicons">
+    <meta name="author" content="Rober Martín H (@rmhdev)">
+
+    <title>Identicons</title>
+
+    {% for asset in ['bootstrap.min.css', 'identicon.css'] %}
+    <link href="./css/{{ asset }}" rel="stylesheet">
+    {% endfor %}
+
+    <!--[if lt IE 9]>
+    {% for js in ['html5shiv.js', 'respond.min.js'] %}
+    <script src="./js/{{ js }}"></script>
+    {% endfor %}
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="./">Identicon</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>Created by Rober Martín H.</p>
+        <p>Theme based on <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a>.</p>
+    </div>
+</footer>
+
+</body>
+</html>

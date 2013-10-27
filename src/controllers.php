@@ -7,5 +7,9 @@ use \Symfony\Component\HttpFoundation\Response;
  */
 
 $app->get("/", function(\Silex\Application $app) {
-    return new Response("Welcome to Identicon", 200);
+    return new Response(
+        $app["twig"]->render("index.twig", array()),
+        200,
+        array()
+    );
 });
