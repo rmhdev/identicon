@@ -18,5 +18,6 @@ class IndexTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertTrue($response->isSuccessful());
+        $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("Identicon")')->count());
     }
 }

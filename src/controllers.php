@@ -2,8 +2,10 @@
 
 use \Symfony\Component\HttpFoundation\Response;
 
-/* @var \Silex\Application $app */
+/* @var \Silex\Application $app
+ * @return Response
+ */
 
 $app->get("/", function(\Silex\Application $app) {
-    return new Response("Hello world!", 200);
+    return new Response("Welcome to Identicon", 200);
 });
