@@ -5,4 +5,6 @@
         <h2 class="text-muted">{{ name }}</h2>
     </div>
 
+    <a href="{{ url("basic", { "name": name }) }}"><img src="/index.php/basic/{{ name }}.png"></a>
+
 {% endblock %}

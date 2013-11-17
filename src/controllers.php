@@ -20,7 +20,7 @@ $app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
     return new Response($identicon->getContent(), 200, array(
         "Content-Type" => "image/png"
     ));
-});
+})->bind("basic");
 
 $app->get("{name}", function(\Silex\Application $app, $name) {
     return new Response(

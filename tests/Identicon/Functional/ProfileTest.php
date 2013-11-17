@@ -19,5 +19,7 @@ class ProfileTest extends WebTestCase
 
         $this->assertTrue($response->isSuccessful());
         $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("myidentity")')->count());
+        $this->assertEquals(1, $crawler->filter('.container > img')->count());
+        $this->assertEquals(1, $crawler->filter('.container > a')->count());
     }
 }
