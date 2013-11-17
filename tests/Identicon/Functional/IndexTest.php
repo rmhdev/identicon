@@ -21,6 +21,14 @@ class IndexTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("Identicon")')->count());
     }
 
+    public function testHtmlTitleContainsTheName()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/");
+
+        $this->assertEquals("Identicons", $crawler->filter("html > head > title")->text());
+    }
+
     public function testHeaderLink()
     {
         $client = $this->createClient();
