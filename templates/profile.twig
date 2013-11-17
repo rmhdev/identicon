@@ -1,10 +1,15 @@
 {% extends 'layout.twig' %}
 
+{% block title %}{{ name }} - {% endblock %}
+{% set basic = url("basic", { "name": name }) %}
+
 {% block content %}
     <div class="masthead">
         <h2 class="text-muted">{{ name }}</h2>
     </div>
 
-    <a href="{{ url("basic", { "name": name }) }}"><img src="/index.php/basic/{{ name }}.png"></a>
+    <div class="identicon-image identicon-image-basic">
+    <a href="{{ basic }}"><img src="{{ basic }}" alt="Identicon for {{ name }}"></a>
+    </div>
 
 {% endblock %}

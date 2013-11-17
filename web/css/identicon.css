@@ -1,13 +1,57 @@
 body > .container {
     margin-top: 40px;
+    padding: 0 20px;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
 .masthead h2 {
+    margin: 0 -20px;
     text-align: center;
-    border-bottom: 1px solid #eeeeee;
-    padding-bottom: 5px;
+    padding: 40px;
+    background-color: #f5f5f5;
+    color: #555555;
 }
 
+.identicon-image {
+    text-align: center;
+    margin: 10px auto;
+}
+
+/* Responsive
+-------------------------------------------------- */
+
+@media (min-width: 300px) and (max-width: 480px) {
+    body > .container {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .identicon-image-basic img {
+        width: 250px;
+        height: 250px;
+    }
+    .masthead h2 {
+        padding: 20px;
+    }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+    .identicon-image-basic img {
+        width: 350px;
+        height: 350px;
+    }
+}
+@media (min-width: 768px) {
+    .identicon-image-basic img {
+        width: 420px;
+        height: 420px;
+    }
+}
+@media (min-width: 992px) {
+
+}
+@media (min-width: 1170px) {
+
+}
 
 /* Footer
 -------------------------------------------------- */

@@ -13,7 +13,7 @@ $app->get("/", function(\Silex\Application $app) {
         200,
         array()
     );
-});
+})->bind("index");
 
 $app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
     $identicon = new Identicon($name);

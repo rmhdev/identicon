@@ -6,7 +6,7 @@
     <meta name="description" content="A pet project for creating identicons">
     <meta name="author" content="Rober Martín H (@rmhdev)">
 
-    <title>Identicons</title>
+    <title>{% block title %}{% endblock %}Identicons</title>
 
     {% for asset in ['bootstrap.min.css', 'identicon.css'] %}
     <link href="/css/{{ asset }}" rel="stylesheet">
@@ -26,7 +26,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Identicon</a>
+            <a class="navbar-brand" href="{{ url("index") }}">Identicon</a>
         </div>
     </div>
 </div>
