@@ -14,9 +14,14 @@ class Identity
 
     public function __construct($identification)
     {
-        $this->identification = $identification;
-        $this->hash = sha1($identification);
+        $this->prepareIdentification($identification);
         $this->initializeBlocks();
+    }
+
+    protected function prepareIdentification($identification)
+    {
+        $this->identification = mb_convert_case($identification, MB_CASE_LOWER, "utf8");
+        $this->hash = sha1($this->identification);
     }
 
     protected function initializeBlocks()

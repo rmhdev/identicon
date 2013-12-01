@@ -91,4 +91,24 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, strlen($identity->getCode()));
     }
 
+    public function testIsCaseInsensitive()
+    {
+        $identityLower = new Identity("myidentity");
+        $identityUpperCase = new Identity("MYIDENTITY");
+        $this->assertEquals($identityLower->__toString(), $identityUpperCase->__toString());
+
+        $identityCamelCase = new Identity("MyIdentity");
+        $this->assertEquals($identityLower->__toString(), $identityCamelCase->__toString());
+    }
+
+    public function testIsMultiByteInsensitive()
+    {
+        $identityLower = new Identity("idëntificaçióñ");
+        $identityUpperCase = new Identity("IDËNTIFICAÇIÓÑ");
+        $this->assertEquals($identityLower->__toString(), $identityUpperCase->__toString());
+
+        $identityCamelCase = new Identity("IdëntificaÇióñ");
+        $this->assertEquals($identityLower->__toString(), $identityCamelCase->__toString());
+    }
+
 }
