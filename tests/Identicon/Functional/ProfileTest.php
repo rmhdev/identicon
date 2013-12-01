@@ -18,16 +18,48 @@ class ProfileTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("myidentity")')->count());
-        $this->assertEquals(1, $crawler->filter('.container img')->count());
     }
 
-    public function testHtmlTitleContainsTheName()
+    /**
+     * @dataProvider identityNamesProvider
+     */
+    public function testProfileContainsName($name, $expected)
+    {
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/{$name}");
+
+        $this->assertContains($expected, $crawler->filter('html > body > header')->text());
+    }
+
+    public function identityNamesProvider()
+    {
+        return array(
+            array("myidentity", "myidentity"),
+            array("MyIdentity", "myidentity"),
+
+            //strange: doesn't work with uppercase special chars:
+            //array("IdËntificaÇióñ", "idëntificaçióñ"),
+        );
+    }
+
+    /**
+     * @dataProvider identityNamesProvider
+     */
+    public function testHtmlHeadContainsName($name, $expected)
+    {
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/{$name}");
+
+        $this->assertContains($expected, $crawler->filter("html > head > title")->text());
+        $this->assertContains($expected, $crawler->filter('html > head > meta[name="description"]')->attr("content"));
+    }
+
+    public function testProfileContainsImage()
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/myidentity");
 
-        $this->assertStringStartsWith("myidentity", $crawler->filter("html > head > title")->text());
-        $this->assertContains("myidentity", $crawler->filter('html > head > meta[name="description"]')->attr("content"));
+        $this->assertEquals(1, $crawler->filter('.container img')->count());
     }
+
 }

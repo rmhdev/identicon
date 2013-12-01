@@ -8,20 +8,20 @@ class Identity
 {
 
     protected
-        $identification,
+        $name,
         $hash,
         $blocks;
 
-    public function __construct($identification)
+    public function __construct($name)
     {
-        $this->prepareIdentification($identification);
+        $this->prepareIdentification($name);
         $this->initializeBlocks();
     }
 
     protected function prepareIdentification($identification)
     {
-        $this->identification = mb_convert_case($identification, MB_CASE_LOWER, "utf8");
-        $this->hash = sha1($this->identification);
+        $this->name = mb_convert_case($identification, MB_CASE_LOWER, "UTF-8");
+        $this->hash = sha1($this->name);
     }
 
     protected function initializeBlocks()
@@ -115,6 +115,11 @@ class Identity
     public function getCode()
     {
         return substr($this->hash, strlen($this->hash) - 3, 3);
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
 }

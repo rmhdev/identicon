@@ -2,6 +2,7 @@
 
 use \Symfony\Component\HttpFoundation\Response;
 use Identicon\Identicon;
+use Identicon\Identity\Identity;
 
 /* @var \Silex\Application $app
  * @return Response
@@ -23,9 +24,10 @@ $app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
 })->bind("basic");
 
 $app->get("{name}", function(\Silex\Application $app, $name) {
+    $identity = new Identity($name);
     return new Response(
         $app["twig"]->render("profile.twig", array(
-            "name" => $name
+            "name" => $identity->getName()
         )),
         200,
         array()

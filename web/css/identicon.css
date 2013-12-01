@@ -9,6 +9,7 @@ body > main .container {
     padding: 40px;
     background-color: #f5f5f5;
     color: #555555;
+    border-bottom: 1px solid #e5e5e5;
 }
 .header h2 {
     margin: 40px -20px 0 -20px;

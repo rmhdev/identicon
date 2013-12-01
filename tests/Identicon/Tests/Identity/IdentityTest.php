@@ -111,4 +111,14 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($identityLower->__toString(), $identityCamelCase->__toString());
     }
 
+    public function testGetName()
+    {
+        $identity = new Identity("myidentity");
+        $this->assertEquals("myidentity", $identity->getName());
+        $identityCamelCase = new Identity("MyIdentity");
+        $this->assertEquals("myidentity", $identityCamelCase->getName());
+        $identityComplex = new Identity("IdëntificaÇióñ");
+        $this->assertEquals("idëntificaçióñ", $identityComplex->getName());
+    }
+
 }
