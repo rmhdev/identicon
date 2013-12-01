@@ -34,9 +34,7 @@ class IndexTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
-        $response = $client->getResponse();
 
-        $this->assertTrue($response->isSuccessful());
         $this->assertGreaterThanOrEqual(1, $crawler->filter('a.navbar-brand')->count());
 
         $host = $client->getServerParameter("HTTP_HOST");
