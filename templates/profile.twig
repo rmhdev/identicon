@@ -2,15 +2,13 @@
 
 {% block title %}{{ name }} - {% endblock %}
 {% block description %}Identicon profile for {{ name }}{% endblock %}
+{% block header %}{{ name }}{% endblock %}
 {% set basic = url("basic", { "name": name }) %}
 
 {% block content %}
-    <div class="masthead">
-        <h2 class="text-muted">{{ name }}</h2>
-    </div>
 
-    <div class="identicon-image identicon-image-basic">
-    <a href="{{ basic }}"><img src="{{ basic }}" alt="Identicon for {{ name }}"></a>
-    </div>
+    <section class="identicon-image identicon-image-basic">
+        <a href="{{ basic }}"><img src="{{ basic }}" alt="Identicon for {{ name }}"></a>
+    </section>
 
 {% endblock %}

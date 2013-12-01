@@ -1,16 +1,18 @@
-body > .container {
-    margin-top: 40px;
+body > main .container {
+    margin: 0 auto 0 auto;
     padding: 0 20px;
     border-radius: 0 0 6px 6px;
     box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
-.masthead h2 {
-    margin: 0 -20px;
-    text-align: center;
+.header {
     padding: 40px;
     background-color: #f5f5f5;
     color: #555555;
+}
+.header h2 {
+    margin: 40px -20px 0 -20px;
+    text-align: center;
 }
 
 .identicon-image {
@@ -22,7 +24,7 @@ body > .container {
 -------------------------------------------------- */
 
 @media (min-width: 300px) and (max-width: 480px) {
-    body > .container {
+    body > main .container {
         border-radius: 0;
         box-shadow: none;
     }
@@ -30,7 +32,7 @@ body > .container {
         width: 250px;
         height: 250px;
     }
-    .masthead h2 {
+    .header {
         padding: 20px;
     }
 }
