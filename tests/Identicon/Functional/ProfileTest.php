@@ -28,5 +28,6 @@ class ProfileTest extends WebTestCase
         $crawler = $client->request("GET", "/myidentity");
 
         $this->assertStringStartsWith("myidentity", $crawler->filter("html > head > title")->text());
+        $this->assertContains("myidentity", $crawler->filter('html > head > meta[name="description"]')->attr("content"));
     }
 }

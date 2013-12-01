@@ -26,7 +26,8 @@ class IndexTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
 
-        $this->assertEquals("Identicons", $crawler->filter("html > head > title")->text());
+        $this->assertContains("Identicons", $crawler->filter("html > head > title")->text());
+        $this->assertContains("identicons", $crawler->filter('html > head > meta[name="description"]')->attr("content"));
     }
 
     public function testHeaderLink()

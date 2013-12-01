@@ -1,6 +1,7 @@
 {% extends 'layout.twig' %}
 
 {% block title %}{{ name }} - {% endblock %}
+{% block description %}Identicon profile for {{ name }}{% endblock %}
 {% set basic = url("basic", { "name": name }) %}
 
 {% block content %}

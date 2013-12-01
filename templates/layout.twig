@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A pet project for creating identicons">
+    <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="author" content="Rober Martín H (@rmhdev)">
 
-    <title>{% block title %}{% endblock %}Identicons</title>
+    <title>{% block title %}{% endblock %}Identicons by rmhdev</title>
 
     {% for asset in ['bootstrap.min.css', 'identicon.css'] %}
     <link href="/css/{{ asset }}" rel="stylesheet">
