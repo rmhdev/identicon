@@ -9,15 +9,7 @@ use Identicon\Identity\Identity;
  * @return Response
  */
 
-$app->get("/", function(\Silex\Application $app) {
-    return new Response(
-        $app["twig"]->render("index.twig", array("error" => false)),
-        200,
-        array()
-    );
-})->bind("index");
-
-$app->post("/", function(Request $request) use ($app) {
+$app->match("/", function(Request $request) use ($app) {
     $name = $request->request->get("name");
     if ($name) {
         return $app->redirect("/{$name}");
@@ -27,7 +19,7 @@ $app->post("/", function(Request $request) use ($app) {
         200,
         array()
     );
-});
+})->bind("index");
 
 $app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
     $identicon = new Identicon($name);
