@@ -11,12 +11,17 @@ body > main .container {
     color: #555555;
     border-bottom: 1px solid #e5e5e5;
 }
-.header h2 {
+.header h1 {
     margin: 40px -20px 0 -20px;
     text-align: center;
+    font-size: 190%;
 }
-.main form {
-    margin-top: 25px;
+.main .container{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.main .description h2 {
+    font-size: 170%;
 }
 .identicon-image {
     text-align: center;
@@ -39,7 +44,7 @@ body > main .container {
         padding: 20px;
     }
     .main .description h2 {
-        font-size: 190%;
+        font-size: 150%;
     }
 }
 @media (min-width: 481px) and (max-width: 767px) {
