@@ -1,6 +1,7 @@
 <?php
 
 use \Symfony\Component\HttpFoundation\Response;
+use \Symfony\Component\HttpFoundation\Request;
 use Identicon\Identicon;
 use Identicon\Identity\Identity;
 
@@ -10,11 +11,23 @@ use Identicon\Identity\Identity;
 
 $app->get("/", function(\Silex\Application $app) {
     return new Response(
-        $app["twig"]->render("index.twig", array()),
+        $app["twig"]->render("index.twig", array("error" => false)),
         200,
         array()
     );
 })->bind("index");
+
+$app->post("/", function(Request $request) use ($app) {
+    $name = $request->request->get("name");
+    if ($name) {
+        return $app->redirect("/{$name}");
+    }
+    return new Response(
+        $app["twig"]->render("index.twig", array("error" => $name ? false : true)),
+        200,
+        array()
+    );
+});
 
 $app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
     $identicon = new Identicon($name);
@@ -23,7 +36,7 @@ $app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
     ));
 })->bind("basic");
 
-$app->get("{name}", function(\Silex\Application $app, $name) {
+$app->get("/{name}", function(\Silex\Application $app, $name) {
     $identity = new Identity($name);
     return new Response(
         $app["twig"]->render("profile.twig", array(

@@ -40,4 +40,32 @@ class IndexTest extends WebTestCase
         $host = $client->getServerParameter("HTTP_HOST");
         $this->assertEquals("http://{$host}/", $crawler->filter('a.navbar-brand ')->attr("href"));
     }
+
+    public function testGenerateEmptyNameReturnsError()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/");
+        $form = $crawler->selectButton('generate')->form();
+
+        // set some values
+        $form['name'] = '';
+
+        // submit the form
+        $crawler = $client->submit($form);
+        $this->assertEquals(1, $crawler->filter("form.error")->count());
+    }
+
+    public function testGenerateCorrectNameRedirectToProfile()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/");
+        $form = $crawler->selectButton('generate')->form();
+
+        // set some values
+        $form['name'] = 'mytest';
+
+        // submit the form
+        $crawler = $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirection());
+    }
 }
