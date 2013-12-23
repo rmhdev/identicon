@@ -3,3 +3,5 @@
 /vendor
 /.idea
 .DS_Store
+/cache/*
+!/cache/.gitkeep

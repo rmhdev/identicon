@@ -68,4 +68,13 @@ class IndexTest extends WebTestCase
         $crawler = $client->submit($form);
         $this->assertTrue($client->getResponse()->isRedirection());
     }
+
+    public function testCachedIndexPage()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/");
+        $response = $client->getResponse();
+        $this->assertTrue($response->isCacheable());
+    }
+
 }

@@ -14,11 +14,16 @@ $app->match("/", function(Request $request) use ($app) {
     if ($name) {
         return $app->redirect("/{$name}");
     }
-    return new Response(
+    $response = new Response(
         $app["twig"]->render("index.twig", array("error" => $name ? false : true)),
         200,
-        array()
+        array(
+            "Cache-Control" => "public"
+        )
     );
+    $response->setEtag(md5($response->getContent()));
+
+    return $response;
 })->bind("index");
 
 $app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
