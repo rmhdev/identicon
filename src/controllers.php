@@ -18,9 +18,10 @@ $app->match("/", function(Request $request) use ($app) {
         $app["twig"]->render("index.twig", array("error" => $name ? false : true)),
         200,
         array(
-            "Cache-Control" => "public"
+            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
         )
     );
+    $response->isNotModified($request);
     $response->setEtag(md5($response->getContent()));
 
     return $response;

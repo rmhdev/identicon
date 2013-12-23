@@ -75,6 +75,8 @@ class IndexTest extends WebTestCase
         $client->request("GET", "/");
         $response = $client->getResponse();
         $this->assertTrue($response->isCacheable());
+        $this->assertEquals(3600, $response->getMaxAge());
+        $this->assertTrue($response->isValidateable());
     }
 
 }
