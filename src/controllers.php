@@ -27,14 +27,19 @@ $app->match("/", function(Request $request) use ($app) {
     return $response;
 })->bind("index");
 
-$app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
+$app->get("/basic/{name}.png", function(Request $request, $name) use ($app) {
     $identicon = new Identicon($name);
-    return new Response($identicon->getContent(), 200, array(
-        "Content-Type" => "image/png"
+    $response = new Response($identicon->getContent(), 200, array(
+        "Content-Type" => "image/png",
+        "Cache-Control" => "public, max-age=3600, s-maxage=3600"
     ));
+    $response->isNotModified($request);
+    $response->setEtag(md5($response->getContent()));
+
+    return $response;
 })->bind("basic");
 
-$app->get("/{name}", function(\Silex\Application $app, $name) {
+$app->get("/{name}", function(Request $request, $name) use ($app) {
     $identity = new Identity($name);
     $response = new Response(
         $app["twig"]->render("profile.twig", array(
@@ -45,6 +50,7 @@ $app->get("/{name}", function(\Silex\Application $app, $name) {
             "Cache-Control" => "public, max-age=3600, s-maxage=3600"
         )
     );
+    $response->isNotModified($request);
     $response->setEtag(md5($response->getContent()));
 
     return $response;
