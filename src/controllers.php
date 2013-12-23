@@ -36,11 +36,16 @@ $app->get("/basic/{name}.png", function(\Silex\Application $app, $name) {
 
 $app->get("/{name}", function(\Silex\Application $app, $name) {
     $identity = new Identity($name);
-    return new Response(
+    $response = new Response(
         $app["twig"]->render("profile.twig", array(
             "name" => $identity->getName()
         )),
         200,
-        array()
+        array(
+            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
+        )
     );
+    $response->setEtag(md5($response->getContent()));
+
+    return $response;
 });

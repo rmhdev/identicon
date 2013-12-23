@@ -62,4 +62,14 @@ class ProfileTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('.container img')->count());
     }
 
+    public function testCachedProfilePage()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/myidentity");
+        $response = $client->getResponse();
+        $this->assertTrue($response->isCacheable());
+        $this->assertEquals(3600, $response->getMaxAge());
+        $this->assertTrue($response->isValidateable());
+    }
+
 }
