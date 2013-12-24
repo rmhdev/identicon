@@ -7,7 +7,7 @@ use Imagine\Image\Point;
 
 class Identicon extends AbstractIdenticon
 {
-    protected function drawBlockForm($x, $y)
+    protected function drawBlock($x, $y)
     {
         $this->image->draw()->polygon(
             $this->calculatePolygonCoordinates($x, $y),

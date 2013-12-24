@@ -118,19 +118,19 @@ abstract class AbstractIdenticon
         $length = $this->getIdentity()->getLength();
         for ($x = 0; $x < $length; $x++) {
             for ($y = 0; $y < $length; $y++) {
-                $this->drawBlock($x, $y);
+                $this->drawBlockIfIsColored($x, $y);
             }
         }
     }
 
-    protected function drawBlock($x, $y)
+    protected function drawBlockIfIsColored($x, $y)
     {
         if ($this->getIdentity()->getBlock($x, $y)->isColored()) {
-            $this->drawBlockForm($x, $y);
+            $this->drawBlock($x, $y);
         }
     }
 
-    abstract protected function drawBlockForm($x, $y);
+    abstract protected function drawBlock($x, $y);
 
 
     public function getColor()

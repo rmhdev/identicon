@@ -8,7 +8,7 @@ use Imagine\Image\Point;
 
 class Identicon extends AbstractIdenticon
 {
-    protected function drawBlockForm($x, $y)
+    protected function drawBlock($x, $y)
     {
         $margin = $this->getOption("margin");
         $blockSize = $this->getOption("block-size");
