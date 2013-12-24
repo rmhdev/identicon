@@ -3,21 +3,16 @@
 namespace Identicon;
 
 use Identicon\Identity\Identity;
+use Identicon\Types\Square\Identicon;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 
-class IdenticonTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCreateNew()
-    {
-        $identicon = new Identicon("myidentity");
-
-        $this->assertInstanceOf("\Identicon\Identicon", $identicon);
-    }
 
     public function testGetIdentity()
     {
-        $identicon = new Identicon("myidentity");
+        $identicon = $this->createIdenticon("myidentity");
         $identity = $identicon->getIdentity();
         $expectedIdentity = new Identity("myidentity");
         $this->assertEquals($identity->__toString(), $expectedIdentity->__toString());
@@ -25,7 +20,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetContentGeneratesImage()
     {
-        $identicon = new Identicon("myidentity");
+        $identicon = $this->createIdenticon("myidentity");
         $filename = $this->createFile($identicon);
         $this->assertFileExists($filename);
 
@@ -40,7 +35,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetContentDrawsIdentityInImage()
     {
-        $identicon = new Identicon("probando");
+        $identicon = $this->createIdenticon("probando");
         $filename = $this->createFile($identicon);
         $image = $this->createImage($filename);
 
@@ -78,21 +73,21 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetColor()
     {
-        $identicon = new Identicon("myidentity");
+        $identicon = $this->createIdenticon("myidentity");
         $this->assertInstanceOf("\Imagine\Image\Color", $identicon->getColor());
     }
 
     public function testGetBackgroundColor()
     {
-        $identicon = new Identicon("myidentity");
+        $identicon = $this->createIdenticon("myidentity");
         $backgroundColor = $identicon->getBackgroundColor();
         $this->assertInstanceOf("\Imagine\Image\Color", $backgroundColor);
-        $this->assertStringEndsWith(Identicon::BACKGROUND_COLOR, (string) $backgroundColor);
+        $this->assertStringEndsWith(AbstractIdenticon::BACKGROUND_COLOR, (string) $backgroundColor);
     }
 
     public function testPersonalizedBackgroundColor()
     {
-        $identicon = new Identicon("myidentity", array("background-color" => "5f0963"));
+        $identicon = $this->createIdenticon("myidentity", array("background-color" => "5f0963"));
         $backgroundColor = $identicon->getBackgroundColor();
         $this->assertEquals("#5f0963", (string) $backgroundColor);
 
@@ -108,12 +103,12 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
      */
     public function testIncorrectBackgroundColorThrowsException()
     {
-        $identicon = new Identicon("myidentity", array("background-color" => "55"));
+        $identicon = $this->createIdenticon("myidentity", array("background-color" => "55"));
     }
 
     public function testPersonalizedMargin()
     {
-        $identicon = new Identicon("myidentity", array("margin" => 10));
+        $identicon = $this->createIdenticon("myidentity", array("margin" => 10));
         $expectedWidth = 10*2 + 5*70;
         $this->assertEquals($expectedWidth, $identicon->getWidth());
 
@@ -127,7 +122,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
      */
     public function testIncorrectMarginThrowException($marginValue)
     {
-        $identicon = new Identicon("myidentity", array("margin" => $marginValue));
+        $this->createIdenticon("myidentity", array("margin" => $marginValue));
     }
 
     public function incorrectMarginValuesProvider()
@@ -141,7 +136,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
     public function testPersonalizedBlockSize()
     {
-        $identicon = new Identicon("myIdentity", array("block-size" => 50));
+        $identicon = $this->createIdenticon("myIdentity", array("block-size" => 50));
         $expectedWidth = 35*2 + 5*50;
         $this->assertEquals($expectedWidth, $identicon->getWidth());
 
@@ -155,7 +150,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
      */
     public function testIncorrectBlockSizeThrowException($blockSize)
     {
-        $identicon = new Identicon("myidentity", array("block-size" => $blockSize));
+        $this->createIdenticon("myidentity", array("block-size" => $blockSize));
     }
 
     public function incorrectBlockSizesValuesProvider()
@@ -165,5 +160,12 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
             array("test")
         );
     }
+
+    /**
+     * @param $name
+     * @param array $options
+     * @return AbstractIdenticon
+     */
+    abstract protected function createIdenticon($name, $options = array());
 
 }

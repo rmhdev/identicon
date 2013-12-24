@@ -7,9 +7,8 @@ use Identicon\Identity\Identity;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Color;
-use Imagine\Image\Point;
 
-class Identicon
+abstract class AbstractIdenticon
 {
     const
         MARGIN = 35,
@@ -135,19 +134,13 @@ class Identicon
         }
     }
 
-    protected function calculatePolygonCoordinates($x, $y)
-    {
-        $margin = $this->getOption("margin");
-        $blockSize = $this->getOption("block-size");
-        $startX = $margin + $blockSize * $y;
-        $startY = $margin + $blockSize * $x;
-        return array(
-            new Point($startX, $startY),
-            new Point($startX + $blockSize, $startY),
-            new Point($startX + $blockSize, $startY + $blockSize),
-            new Point($startX, $startY + $blockSize)
-        );
-    }
+    /**
+     * @param $x
+     * @param $y
+     * @return array
+     */
+    abstract protected function calculatePolygonCoordinates($x, $y);
+
 
     public function getColor()
     {
