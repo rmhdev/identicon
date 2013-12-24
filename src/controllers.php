@@ -39,8 +39,13 @@ $app->get("/{name}.png", function(Request $request, $name) use ($app) {
     return $response;
 })->bind("basic");
 
-$app->get("/{name}/{type}.png", function(Request $request, $name) use ($app) {
-    $identicon = new \Identicon\Types\Triangle\Identicon($name);
+$app->get("/{name}/{type}.png", function(Request $request, $name, $type) use ($app) {
+    $class = sprintf('\Identicon\Types\%s\Identicon', ucfirst($type));
+    if (!class_exists($class)) {
+        return new Response("Error", 404);
+    }
+    $identicon = new $class($name);
+    /* @var \Identicon\AbstractIdenticon $identicon */
     $response = new Response($identicon->getContent(), 200, array(
         "Content-Type" => "image/png",
     ));
