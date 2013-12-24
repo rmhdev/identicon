@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<form method="post" class="{% if error == true %}error{% endif %}">
+<form href="{{ url("index") }}" method="post" class="{% if error == true %}error{% endif %}">
     <div class="input-group">
         <input type="text" class="form-control input-large" name="name" id="name" placeholder="Type a word">
         <span class="input-group-btn">
