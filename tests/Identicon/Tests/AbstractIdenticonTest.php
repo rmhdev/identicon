@@ -3,7 +3,6 @@
 namespace Identicon;
 
 use Identicon\Identity\Identity;
-use Identicon\Types\Square\Identicon;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 
@@ -57,7 +56,7 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
         unlink($filename);
     }
 
-    protected function createFile(Identicon $identicon)
+    protected function createFile(AbstractIdenticon $identicon)
     {
         $filename = sprintf("%s/%s.%s", sys_get_temp_dir(), uniqid("identicon-test-"), "png");
         file_put_contents($filename, $identicon->getContent());
