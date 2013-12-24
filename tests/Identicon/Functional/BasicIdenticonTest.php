@@ -36,7 +36,7 @@ class BasicIdenticonTest extends WebTestCase
     public function testLoadingIndexPage()
     {
         $client = $this->createClient();
-        $crawler = $client->request("GET", "/basic/identity.png");
+        $crawler = $client->request("GET", "/identity.png");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isSuccessful());
@@ -68,7 +68,7 @@ class BasicIdenticonTest extends WebTestCase
     public function testCachedBasicIdenticonPage()
     {
         $client = $this->createClient();
-        $client->request("GET", "/basic/identity.png");
+        $client->request("GET", "/identity.png");
         $response = $client->getResponse();
         $this->assertTrue($response->isCacheable());
         $this->assertEquals(3600, $response->getMaxAge());

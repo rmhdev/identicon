@@ -27,7 +27,7 @@ $app->match("/", function(Request $request) use ($app) {
     return $response;
 })->bind("index");
 
-$app->get("/basic/{name}.png", function(Request $request, $name) use ($app) {
+$app->get("/{name}.png", function(Request $request, $name) use ($app) {
     $identicon = new Identicon($name);
     $response = new Response($identicon->getContent(), 200, array(
         "Content-Type" => "image/png",
