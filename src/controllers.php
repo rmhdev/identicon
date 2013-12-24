@@ -3,6 +3,7 @@
 use \Symfony\Component\HttpFoundation\Response;
 use \Symfony\Component\HttpFoundation\Request;
 use Identicon\Identity\Identity;
+use \Identicon\Types\Circle\Identicon;
 
 /* @var \Silex\Application $app
  * @return Response
@@ -27,7 +28,7 @@ $app->match("/", function(Request $request) use ($app) {
 })->bind("index");
 
 $app->get("/{name}.png", function(Request $request, $name) use ($app) {
-    $identicon = new \Identicon\Types\Square\Identicon($name);
+    $identicon = new Identicon($name);
     $response = new Response($identicon->getContent(), 200, array(
         "Content-Type" => "image/png",
         "Cache-Control" => "public, max-age=3600, s-maxage=3600"
@@ -37,6 +38,15 @@ $app->get("/{name}.png", function(Request $request, $name) use ($app) {
 
     return $response;
 })->bind("basic");
+
+$app->get("/{name}/{type}.png", function(Request $request, $name) use ($app) {
+    $identicon = new \Identicon\Types\Triangle\Identicon($name);
+    $response = new Response($identicon->getContent(), 200, array(
+        "Content-Type" => "image/png",
+    ));
+
+    return $response;
+})->bind("extra");
 
 $app->get("/{name}", function(Request $request, $name) use ($app) {
     $identity = new Identity($name);
