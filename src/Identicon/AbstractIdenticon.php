@@ -126,20 +126,11 @@ abstract class AbstractIdenticon
     protected function drawBlock($x, $y)
     {
         if ($this->getIdentity()->getBlock($x, $y)->isColored()) {
-            $this->image->draw()->polygon(
-                $this->calculatePolygonCoordinates($x, $y),
-                $this->getColor(),
-                true
-            );
+            $this->drawBlockForm($x, $y);
         }
     }
 
-    /**
-     * @param $x
-     * @param $y
-     * @return array
-     */
-    abstract protected function calculatePolygonCoordinates($x, $y);
+    abstract protected function drawBlockForm($x, $y);
 
 
     public function getColor()

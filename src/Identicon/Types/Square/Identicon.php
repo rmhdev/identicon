@@ -7,6 +7,15 @@ use Imagine\Image\Point;
 
 class Identicon extends AbstractIdenticon
 {
+    protected function drawBlockForm($x, $y)
+    {
+        $this->image->draw()->polygon(
+            $this->calculatePolygonCoordinates($x, $y),
+            $this->getColor(),
+            true
+        );
+    }
+
     protected function calculatePolygonCoordinates($x, $y)
     {
         $margin = $this->getOption("margin");

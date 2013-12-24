@@ -27,7 +27,7 @@ $app->match("/", function(Request $request) use ($app) {
 })->bind("index");
 
 $app->get("/{name}.png", function(Request $request, $name) use ($app) {
-    $identicon = new \Identicon\Types\Square\Identicon($name);
+    $identicon = new \Identicon\Types\Circle\Identicon($name);
     $response = new Response($identicon->getContent(), 200, array(
         "Content-Type" => "image/png",
         "Cache-Control" => "public, max-age=3600, s-maxage=3600"
