@@ -3,7 +3,7 @@
 use \Symfony\Component\HttpFoundation\Response;
 use \Symfony\Component\HttpFoundation\Request;
 use Identicon\Identity\Identity;
-use \Identicon\Types\Circle\Identicon;
+use \Identicon\Types\Square\Identicon;
 
 /* @var \Silex\Application $app
  * @return Response
@@ -48,7 +48,10 @@ $app->get("/{name}/{type}.png", function(Request $request, $name, $type) use ($a
     /* @var \Identicon\AbstractIdenticon $identicon */
     $response = new Response($identicon->getContent(), 200, array(
         "Content-Type" => "image/png",
+        "Cache-Control" => "public, max-age=3600, s-maxage=3600"
     ));
+    $response->isNotModified($request);
+    $response->setEtag(md5($response->getContent()));
 
     return $response;
 })->bind("extra");

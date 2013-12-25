@@ -35,12 +35,22 @@ class ExtraTypeIdenticonTest extends AbstractTypeIdenticonTest
     }
 
 
-    public function testUnknowTypePage()
+    public function testUnknownTypePage()
     {
         $client = $this->createClient();
         $client->request("GET", "/identity/unknown.png");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isClientError());
+    }
+
+    public function testCachedExtraType()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/identity/circle.png");
+        $response = $client->getResponse();
+        $this->assertTrue($response->isCacheable());
+        $this->assertEquals(3600, $response->getMaxAge());
+        $this->assertTrue($response->isValidateable());
     }
 }
