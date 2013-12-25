@@ -59,7 +59,7 @@ class ProfileTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request("GET", "/myidentity");
 
-        $this->assertEquals(1, $crawler->filter('.container img')->count());
+        $this->assertEquals(1, $crawler->filter('.container .identicon-image-basic img')->count());
     }
 
     public function testCachedProfilePage()
@@ -70,6 +70,14 @@ class ProfileTest extends WebTestCase
         $this->assertTrue($response->isCacheable());
         $this->assertEquals(3600, $response->getMaxAge());
         $this->assertTrue($response->isValidateable());
+    }
+
+    public function testProfileContainsExtraImages()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/myidentity");
+
+        $this->assertGreaterThanOrEqual(1, $crawler->filter('.container .identicon-extras a')->count());
     }
 
 }

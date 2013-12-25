@@ -11,4 +11,13 @@
         <a href="{{ basic }}"><img src="{{ basic }}" alt="Identicon for {{ name }}"></a>
     </section>
 
+    {% if types|length > 0 %}
+    <section class="identicon-extras text-center">
+        <ul class="list-unstyled list-inline list-group">{% for type in types %}
+        {% set extra = url("extra", { "name": name, "type": type }) %}
+            <li class=""><a href="{{ extra }}" class="btn btn-info btn-large">Type {{ type }}</a></li>
+        {% endfor %}</ul>
+    </section>
+    {% endif %}
+
 {% endblock %}
