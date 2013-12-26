@@ -28,6 +28,11 @@ body > main .container {
     margin: 10px auto;
 }
 
+.identicon-extras {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Responsive
 -------------------------------------------------- */
 
@@ -39,6 +44,9 @@ body > main .container {
     .identicon-image-basic img {
         width: 250px;
         height: 250px;
+    }
+    .identicon-extras {
+        width: 250px;
     }
     .header {
         padding: 20px;
@@ -52,11 +60,17 @@ body > main .container {
         width: 350px;
         height: 350px;
     }
+    .identicon-extras {
+        width: 350px;
+    }
 }
 @media (min-width: 768px) {
     .identicon-image-basic img {
         width: 420px;
         height: 420px;
+    }
+    .identicon-extras {
+        width: 420px;
     }
 }
 @media (min-width: 992px) {

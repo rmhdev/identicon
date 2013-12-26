@@ -13,10 +13,12 @@
 
     {% if types|length > 0 %}
     <section class="identicon-extras text-center">
-        <ul class="list-unstyled list-inline list-group">{% for type in types %}
+        <div class="btn-group-vertical center-block">
+        {% for type in types %}
         {% set extra = url("extra", { "name": name, "type": type }) %}
-            <li class=""><a href="{{ extra }}" class="btn btn-info btn-large">Type {{ type }}</a></li>
-        {% endfor %}</ul>
+        <a href="{{ extra }}" class="btn btn-default btn-lg">Type {{ type }}</a>
+        {% endfor %}
+        </div>
     </section>
     {% endif %}
 
