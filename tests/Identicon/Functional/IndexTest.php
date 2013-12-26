@@ -46,12 +46,8 @@ class IndexTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
         $form = $crawler->selectButton('generate')->form();
+        $crawler = $client->submit($form, array("name" => ""));
 
-        // set some values
-        $form['name'] = '';
-
-        // submit the form
-        $crawler = $client->submit($form);
         $this->assertEquals(1, $crawler->filter("form.error")->count());
     }
 
@@ -60,13 +56,10 @@ class IndexTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
         $form = $crawler->selectButton('generate')->form();
+        $client->submit($form, array("name" => 'mytest'));
 
-        // set some values
-        $form['name'] = 'mytest';
-
-        // submit the form
-        $crawler = $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirection());
+        //$this->assertTrue($client->getResponse()->isRedirect());
+        $this->assertStringEndsWith("/mytest", $client->getHistory()->current()->getUri());
     }
 
     public function testCachedIndexPage()
