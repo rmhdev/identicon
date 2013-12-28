@@ -23,8 +23,7 @@ class Identicon extends AbstractIdenticon
         $startX = $margin + $blockSize * $y;
         $startY = $margin + $blockSize * $x;
         return array(
-            new Point($startX + ($blockSize / 2), $startY),
-            //new Point($startX + $blockSize, $startY),
+            new Point($startX + ($blockSize), $startY),
             new Point($startX + $blockSize, $startY + $blockSize),
             new Point($startX, $startY + $blockSize)
         );
