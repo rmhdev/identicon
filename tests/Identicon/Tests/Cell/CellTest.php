@@ -81,17 +81,22 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((2 * 50) + 50, $pointC->getY());
     }
 
-//    public function testGetEast()
-//    {
-//        $cellA = new Cell(0, 0);
-//        $pointA = $cellA->getEast();
-//        $this->assertEquals(10, $pointA->getX());
-//        $this->assertEquals(5, $pointA->getY());
-//
-//        $cellB = new Cell(0, 0, array("width" => 20));
-//        $pointB = $cellB->getSouth();
-//        $this->assertEquals(20, $pointB->getX());
-//        $this->assertEquals(10, $pointB->getY());
-//    }
+    public function testGetEast()
+    {
+        $cellA = new Cell(0, 0);
+        $pointA = $cellA->getEast();
+        $this->assertEquals(10, $pointA->getX());
+        $this->assertEquals(5, $pointA->getY());
+
+        $cellB = new Cell(0, 0, array("width" => 20));
+        $pointB = $cellB->getEast();
+        $this->assertEquals(20, $pointB->getX());
+        $this->assertEquals(10, $pointB->getY());
+
+        $cellC = new Cell(2, 2, array("width" => 30, "height" => 50));
+        $pointC = $cellC->getEast();
+        $this->assertEquals((2 * 30) + 30, $pointC->getX());
+        $this->assertEquals((2 * 50) + 25, $pointC->getY());
+    }
 }
 
