@@ -55,7 +55,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider cellInfoNorthProvider
+     * @dataProvider getNorthProvider
      */
     public function testGetNorth($positionX, $positionY, $options, $expectedX, $expectedY)
     {
@@ -65,7 +65,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedY, $pointA->getY());
     }
 
-    public function cellInfoNorthProvider()
+    public function getNorthProvider()
     {
         return array(
             array(0, 0, array(), 5, 0),
@@ -76,7 +76,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider cellInfoSouthProvider
+     * @dataProvider getSouthProvider
      */
     public function testGetSouth($positionX, $positionY, $options, $expectedX, $expectedY)
     {
@@ -86,7 +86,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedY, $pointA->getY());
     }
 
-    public function cellInfoSouthProvider()
+    public function getSouthProvider()
     {
         return array(
             array(0, 0, array(), 5, 10),
@@ -97,7 +97,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider cellInfoEastProvider
+     * @dataProvider getEastProvider
      */
     public function testGetEast($positionX, $positionY, $options, $expectedX, $expectedY)
     {
@@ -107,7 +107,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedY, $pointA->getY());
     }
 
-    public function cellInfoEastProvider()
+    public function getEastProvider()
     {
         return array(
             array(0, 0, array(), 10, 5),
@@ -118,7 +118,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider cellInfoWestProvider
+     * @dataProvider getWestProvider
      */
     public function testGetWest($positionX, $positionY, $options, $expectedX, $expectedY)
     {
@@ -128,7 +128,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedY, $point->getY());
     }
 
-    public function cellInfoWestProvider()
+    public function getWestProvider()
     {
         return array(
             array(0, 0, array(), 0, 5),
