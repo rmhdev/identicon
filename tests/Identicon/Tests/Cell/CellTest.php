@@ -185,5 +185,25 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 30, (2 * 50)),
         );
     }
+
+    /**
+     * @dataProvider getSouthWestProvider
+     */
+    public function testGetSouthWest($positionX, $positionY, $options, $expectedX, $expectedY)
+    {
+        $cell = new Cell($positionX, $positionY, $options);
+        $point = $cell->getSouthWest();
+        $this->assertEquals($expectedX, $point->getX());
+        $this->assertEquals($expectedY, $point->getY());
+    }
+
+    public function getSouthWestProvider()
+    {
+        return array(
+            array(0, 0, array(), 0, 10),
+            array(0, 0, array("width" => 20), 0, 20),
+            array(2, 2, array("width" => 30, "height" => 50), (2 * 30), (2 * 50) + 50),
+        );
+    }
 }
 

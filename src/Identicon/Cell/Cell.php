@@ -115,4 +115,12 @@ class Cell
             $this->getStartY()
         );
     }
+
+    public function getSouthWest()
+    {
+        return new Point(
+            $this->getStartX(),
+            $this->getStartY() + $this->getHeight()
+        );
+    }
 }
