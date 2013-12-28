@@ -99,4 +99,12 @@ class Cell
             $this->getStartY() + ($this->getHeight() / 2)
         );
     }
+
+    public function getNorthWest()
+    {
+        return new Point(
+            $this->getStartX(),
+            $this->getStartY()
+        );
+    }
 }
