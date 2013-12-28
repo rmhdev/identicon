@@ -45,6 +45,15 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(20, $cellC->getHeight());
     }
 
+    public function testGetMargin()
+    {
+        $cellA = new Cell(0, 0);
+        $this->assertEquals(0, $cellA->getMargin());
+
+        $cellB = new Cell(0, 0, array("margin" => 19));
+        $this->assertEquals(19, $cellB->getMargin());
+    }
+
     /**
      * @dataProvider cellInfoNorthProvider
      */
@@ -62,6 +71,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 5, 0),
             array(0, 0, array("width" => 20), 10, 0),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 15, (2 * 50)),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 15 + 7, (2 * 50) + 7),
         );
     }
 

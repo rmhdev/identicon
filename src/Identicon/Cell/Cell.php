@@ -26,6 +26,9 @@ class Cell
         if (!isset($options["height"])) {
             $options["height"] = $options["width"];
         }
+        if (!isset($options["margin"])) {
+            $options["margin"] = 0;
+        }
 
         return $options;
     }
@@ -42,12 +45,26 @@ class Cell
 
     public function getWidth()
     {
-        return $this->options["width"];
+        return $this->getOption("width");
     }
 
     public function getHeight()
     {
-        return $this->options["height"];
+        return $this->getOption("height");
+    }
+
+    public function getMargin()
+    {
+        return $this->getOption("margin");
+    }
+
+    protected function getOption($name, $default = 0)
+    {
+        if (!isset($this->options[$name])) {
+            return $default;
+        }
+
+        return $this->options[$name];
     }
 
     public function getNorth()
@@ -60,12 +77,12 @@ class Cell
 
     protected function getStartX()
     {
-        return $this->getPositionX() * $this->getWidth();
+        return ($this->getPositionX() * $this->getWidth()) + $this->getMargin();
     }
 
     protected function getStartY()
     {
-        return $this->getPositionY() * $this->getHeight();
+        return ($this->getPositionY() * $this->getHeight()) + $this->getMargin();
     }
 
     public function getSouth()
