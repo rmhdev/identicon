@@ -123,4 +123,12 @@ class Cell
             $this->getStartY() + $this->getHeight()
         );
     }
+
+    public function getSouthEast()
+    {
+        return new Point(
+            $this->getStartX() + $this->getWidth(),
+            $this->getStartY() + $this->getHeight()
+        );
+    }
 }
