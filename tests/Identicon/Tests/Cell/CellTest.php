@@ -92,6 +92,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 5, 10),
             array(0, 0, array("width" => 20), 10, 20),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 15, (2 * 50) + 50),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 15 + 7, (2 * 50) + 50 + 7),
         );
     }
 
@@ -112,6 +113,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 10, 5),
             array(0, 0, array("width" => 20), 20, 10),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 30, (2 * 50) + 25),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 30 + 7, (2 * 50) + 25 + 7),
         );
     }
 
@@ -132,6 +134,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 0, 5),
             array(0, 0, array("width" => 20), 0, 10),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30), (2 * 50) + 25),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 7, (2 * 50) + 25 + 7),
         );
     }
 
@@ -153,6 +156,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 5, 5),
             array(0, 0, array("width" => 20), 10, 10),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 15, (2 * 50) + 25),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 15 + 7, (2 * 50) + 25 + 7),
         );
     }
 
@@ -173,6 +177,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 0, 0),
             array(0, 0, array("width" => 20), 0, 0),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30), (2 * 50)),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 7, (2 * 50) + 7),
         );
     }
 
@@ -193,6 +198,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 10, 0),
             array(0, 0, array("width" => 20), 20, 0),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 30, (2 * 50)),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 30 + 7, (2 * 50) + 7),
         );
     }
 
@@ -213,6 +219,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 0, 10),
             array(0, 0, array("width" => 20), 0, 20),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30), (2 * 50) + 50),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 7, (2 * 50) + 50 + 7),
         );
     }
 
@@ -233,7 +240,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(0, 0, array(), 10, 10),
             array(0, 0, array("width" => 20), 20, 20),
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 30, (2 * 50) + 50),
+            array(2, 2, array("width" => 30, "height" => 50, "margin" => 7), (2 * 30) + 30 + 7, (2 * 50) + 50 + 7),
         );
     }
 }
-
