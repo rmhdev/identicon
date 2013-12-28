@@ -83,4 +83,12 @@ class Cell
             $this->getStartY() + ($this->getHeight() / 2)
         );
     }
+
+    public function getWest()
+    {
+        return new Point(
+            $this->getStartX(),
+            $this->getStartY() + ($this->getHeight() / 2)
+        );
+    }
 }
