@@ -45,58 +45,64 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(20, $cellC->getHeight());
     }
 
-    public function testGetNorth()
+    /**
+     * @dataProvider cellInfoNorthProvider
+     */
+    public function testGetNorth($positionX, $positionY, $options, $expectedX, $expectedY)
     {
-        $cellA = new Cell(0, 0);
+        $cellA = new Cell($positionX, $positionY, $options);
         $pointA = $cellA->getNorth();
-        $this->assertEquals(5, $pointA->getX());
-        $this->assertEquals(0, $pointA->getY());
-
-        $cellB = new Cell(0, 0, array("width" => 20));
-        $pointB = $cellB->getNorth();
-        $this->assertEquals(10, $pointB->getX());
-        $this->assertEquals(0, $pointB->getY());
-
-        $cellC = new Cell(2, 2, array("width" => 10));
-        $pointC = $cellC->getNorth();
-        $this->assertEquals((2 * 10) + 5, $pointC->getX());
-        $this->assertEquals((2 * 10) + 0, $pointC->getY());
+        $this->assertEquals($expectedX, $pointA->getX());
+        $this->assertEquals($expectedY, $pointA->getY());
     }
 
-    public function testGetSouth()
+    public function cellInfoNorthProvider()
     {
-        $cellA = new Cell(0, 0);
+        return array(
+            array(0, 0, array(), 5, 0),
+            array(0, 0, array("width" => 20), 10, 0),
+            array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 15, (2 * 50)),
+        );
+    }
+
+    /**
+     * @dataProvider cellInfoSouthProvider
+     */
+    public function testGetSouth($positionX, $positionY, $options, $expectedX, $expectedY)
+    {
+        $cellA = new Cell($positionX, $positionY, $options);
         $pointA = $cellA->getSouth();
-        $this->assertEquals(5, $pointA->getX());
-        $this->assertEquals(10, $pointA->getY());
-
-        $cellB = new Cell(0, 0, array("width" => 20));
-        $pointB = $cellB->getSouth();
-        $this->assertEquals(10, $pointB->getX());
-        $this->assertEquals(20, $pointB->getY());
-
-        $cellC = new Cell(2, 2, array("width" => 30, "height" => 50));
-        $pointC = $cellC->getSouth();
-        $this->assertEquals((2 * 30) + 15, $pointC->getX());
-        $this->assertEquals((2 * 50) + 50, $pointC->getY());
+        $this->assertEquals($expectedX, $pointA->getX());
+        $this->assertEquals($expectedY, $pointA->getY());
     }
 
-    public function testGetEast()
+    public function cellInfoSouthProvider()
     {
-        $cellA = new Cell(0, 0);
+        return array(
+            array(0, 0, array(), 5, 10),
+            array(0, 0, array("width" => 20), 10, 20),
+            array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 15, (2 * 50) + 50),
+        );
+    }
+
+    /**
+     * @dataProvider cellInfoEastProvider
+     */
+    public function testGetEast($positionX, $positionY, $options, $expectedX, $expectedY)
+    {
+        $cellA = new Cell($positionX, $positionY, $options);
         $pointA = $cellA->getEast();
-        $this->assertEquals(10, $pointA->getX());
-        $this->assertEquals(5, $pointA->getY());
+        $this->assertEquals($expectedX, $pointA->getX());
+        $this->assertEquals($expectedY, $pointA->getY());
+    }
 
-        $cellB = new Cell(0, 0, array("width" => 20));
-        $pointB = $cellB->getEast();
-        $this->assertEquals(20, $pointB->getX());
-        $this->assertEquals(10, $pointB->getY());
-
-        $cellC = new Cell(2, 2, array("width" => 30, "height" => 50));
-        $pointC = $cellC->getEast();
-        $this->assertEquals((2 * 30) + 30, $pointC->getX());
-        $this->assertEquals((2 * 50) + 25, $pointC->getY());
+    public function cellInfoEastProvider()
+    {
+        return array(
+            array(0, 0, array(), 10, 5),
+            array(0, 0, array("width" => 20), 20, 10),
+            array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 30, (2 * 50) + 25),
+        );
     }
 }
 
