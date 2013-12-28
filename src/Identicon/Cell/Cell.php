@@ -52,11 +52,22 @@ class Cell
 
     public function getNorth()
     {
-        return new Point($this->getWidth() / 2, 0);
+        return new Point(
+            ($this->getPositionX() * $this->getWidth()) + $this->getWidth() / 2,
+            $this->getPositionY() * $this->getHeight()
+        );
     }
 
     public function getSouth()
     {
-        return new Point($this->getWidth() / 2, $this->getHeight());
+        return new Point(
+            ($this->getPositionX() * $this->getWidth()) + ($this->getWidth() / 2),
+            ($this->getPositionY() * $this->getHeight()) + $this->getHeight()
+        );
+    }
+
+    public function getEast()
+    {
+        return new Point($this->getWidth(), $this->getHeight() / 2);
     }
 }

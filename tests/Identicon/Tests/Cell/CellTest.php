@@ -49,39 +49,49 @@ class CellTest extends \PHPUnit_Framework_TestCase
     {
         $cellA = new Cell(0, 0);
         $pointA = $cellA->getNorth();
-
         $this->assertEquals(5, $pointA->getX());
         $this->assertEquals(0, $pointA->getY());
 
         $cellB = new Cell(0, 0, array("width" => 20));
         $pointB = $cellB->getNorth();
-
         $this->assertEquals(10, $pointB->getX());
         $this->assertEquals(0, $pointB->getY());
+
+        $cellC = new Cell(2, 2, array("width" => 10));
+        $pointC = $cellC->getNorth();
+        $this->assertEquals((2 * 10) + 5, $pointC->getX());
+        $this->assertEquals((2 * 10) + 0, $pointC->getY());
     }
 
     public function testGetSouth()
     {
         $cellA = new Cell(0, 0);
         $pointA = $cellA->getSouth();
-
         $this->assertEquals(5, $pointA->getX());
         $this->assertEquals(10, $pointA->getY());
 
         $cellB = new Cell(0, 0, array("width" => 20));
         $pointB = $cellB->getSouth();
-
         $this->assertEquals(10, $pointB->getX());
         $this->assertEquals(20, $pointB->getY());
+
+        $cellC = new Cell(2, 2, array("width" => 30, "height" => 50));
+        $pointC = $cellC->getSouth();
+        $this->assertEquals((2 * 30) + 15, $pointC->getX());
+        $this->assertEquals((2 * 50) + 50, $pointC->getY());
     }
 
 //    public function testGetEast()
 //    {
 //        $cellA = new Cell(0, 0);
 //        $pointA = $cellA->getEast();
+//        $this->assertEquals(10, $pointA->getX());
+//        $this->assertEquals(5, $pointA->getY());
 //
-//        $this->assertEquals(5, $pointA->getX());
-//        $this->assertEquals(10, $pointA->getY());
+//        $cellB = new Cell(0, 0, array("width" => 20));
+//        $pointB = $cellB->getSouth();
+//        $this->assertEquals(20, $pointB->getX());
+//        $this->assertEquals(10, $pointB->getY());
 //    }
 }
 
