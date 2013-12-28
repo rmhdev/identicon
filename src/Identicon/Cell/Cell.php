@@ -91,4 +91,12 @@ class Cell
             $this->getStartY() + ($this->getHeight() / 2)
         );
     }
+
+    public function getCenter()
+    {
+        return new Point(
+            $this->getStartX() + ($this->getWidth() / 2),
+            $this->getStartY() + ($this->getHeight() / 2)
+        );
+    }
 }

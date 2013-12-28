@@ -124,5 +124,26 @@ class CellTest extends \PHPUnit_Framework_TestCase
             array(2, 2, array("width" => 30, "height" => 50), (2 * 30), (2 * 50) + 25),
         );
     }
+
+
+    /**
+     * @dataProvider getCenterProvider
+     */
+    public function testGetCenter($positionX, $positionY, $options, $expectedX, $expectedY)
+    {
+        $cell = new Cell($positionX, $positionY, $options);
+        $point = $cell->getCenter();
+        $this->assertEquals($expectedX, $point->getX());
+        $this->assertEquals($expectedY, $point->getY());
+    }
+
+    public function getCenterProvider()
+    {
+        return array(
+            array(0, 0, array(), 5, 5),
+            array(0, 0, array("width" => 20), 10, 10),
+            array(2, 2, array("width" => 30, "height" => 50), (2 * 30) + 15, (2 * 50) + 25),
+        );
+    }
 }
 
