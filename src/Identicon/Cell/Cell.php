@@ -107,4 +107,12 @@ class Cell
             $this->getStartY()
         );
     }
+
+    public function getNorthEast()
+    {
+        return new Point(
+            $this->getStartX() + $this->getWidth(),
+            $this->getStartY()
+        );
+    }
 }
