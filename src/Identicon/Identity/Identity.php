@@ -36,10 +36,10 @@ class Identity
 
     protected function insertBlock($x, $y)
     {
-        if (!isset($this->blocks[$x])) {
-            $this->blocks[$x] = array();
+        if (!isset($this->blocks[$y])) {
+            $this->blocks[$y] = array();
         }
-        $this->blocks[$x][$y] = $this->createBlock($x, $y);
+        $this->blocks[$y][$x] = $this->createBlock($x, $y);
     }
 
     protected function createBlock($posX, $posY)
@@ -84,7 +84,7 @@ class Identity
             throw new OutOfBoundsException();
         }
 
-        return $this->blocks[$posX][$posY];
+        return $this->blocks[$posY][$posX];
     }
 
     protected function isOutOfBounds($posX, $posY)
