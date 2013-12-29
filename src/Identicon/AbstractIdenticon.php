@@ -2,6 +2,7 @@
 
 namespace Identicon;
 
+use Identicon\Cell\Cell;
 use Identicon\Exception\InvalidArgumentException;
 use Identicon\Identity\Identity;
 use Imagine\Gd\Imagine;
@@ -153,6 +154,14 @@ abstract class AbstractIdenticon
     public function getHeight()
     {
         return $this->image->getSize()->getHeight();
+    }
+
+    protected function getCell($x, $y)
+    {
+        return new Cell($x, $y, array(
+            "width" => $this->getOption("block-size"),
+            "margin" => $this->getOption("margin"),
+        ));
     }
 
 }

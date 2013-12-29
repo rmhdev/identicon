@@ -42,8 +42,8 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
         for ($x = 0; $x < $length; $x++) {
             for ($y = 0; $y < $length; $y++) {
                 $backgroundColor = (string) $identicon->getBackgroundColor();
-                $centerX = 35 + $y*70 + 70/2;
-                $centerY = 35 + $x*70 + 70/2;
+                $centerX = 35 + $x*70 + 70/2;
+                $centerY = 35 + $y*70 + 70/2;
                 $color = $image->getColorAt(new Point($centerX, $centerY));
                 $comment = "position [{$x}, {$y}]: {$centerX}px, {$centerY}px";
                 if ($identicon->getIdentity()->getBlock($x, $y)->isColored()) {

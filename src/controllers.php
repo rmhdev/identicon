@@ -58,6 +58,9 @@ $app->get("/{name}/{type}.png", function(Request $request, $name, $type) use ($a
 
 $app->get("/{name}", function(Request $request, $name) use ($app) {
     $identity = new Identity($name);
+
+    //print_r($identity->__toString()); die();
+
     $response = new Response(
         $app["twig"]->render("profile.twig", array(
             "name" => $identity->getName(),

@@ -60,11 +60,11 @@ class Identity
 
     protected function calculateCharPosition($posX, $posY)
     {
-        if ($posY > $this->getLength() / 2) {
-            $posY = $this->getLength() - $posY - 1;
+        if ($posX > $this->getLength() / 2) {
+            $posX = $this->getLength() - $posX - 1;
         }
 
-        return $posX * $this->getLength() + $posY;
+        return $posY * $this->getLength() + $posX;
     }
 
     public function getLength()
