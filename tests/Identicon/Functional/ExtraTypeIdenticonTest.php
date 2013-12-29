@@ -4,6 +4,16 @@ namespace Identicon\Tests;
 
 class ExtraTypeIdenticonTest extends AbstractTypeIdenticonTest
 {
+    public function testSquarePage()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/identity/square.png");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertImageIsCorrect($response, "identity-square.png");
+    }
+
     public function testTrianglePage()
     {
         $client = $this->createClient();
