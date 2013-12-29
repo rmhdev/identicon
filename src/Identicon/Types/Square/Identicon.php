@@ -26,19 +26,5 @@ class Identicon extends AbstractIdenticon
             $cell->getSouthEast(),
             $cell->getSouthWest(),
         );
-
-
-//        $margin = $this->getOption("margin");
-//        $blockSize = $this->getOption("block-size");
-//        $startX = $margin + $blockSize * $y;
-//        $startY = $margin + $blockSize * $x;
-//        return array(
-//            new Point($startX, $startY),
-//            new Point($startX + $blockSize, $startY),
-//            new Point($startX + $blockSize, $startY + $blockSize),
-//            new Point($startX, $startY + $blockSize)
-//        );
-
-
     }
 }

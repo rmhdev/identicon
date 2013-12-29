@@ -131,7 +131,20 @@ abstract class AbstractIdenticon
         }
     }
 
-    abstract protected function drawBlock($x, $y);
+    protected function drawBlock($x, $y)
+    {
+        $cell = $this->getCell($x, $y);
+        $this->image->draw()->polygon(
+            array(
+                $cell->getNorthWest(),
+                $cell->getNorthEast(),
+                $cell->getSouthEast(),
+                $cell->getSouthWest(),
+            ),
+            $this->getColor(),
+            true
+        );
+    }
 
 
     public function getColor()
