@@ -10,14 +10,12 @@ class Identicon extends AbstractIdenticon
 {
     protected function drawBlock($x, $y)
     {
-        $margin = $this->getOption("margin");
-        $blockSize = $this->getOption("block-size");
-        $centerX = $margin + $blockSize * $y + ($blockSize / 2);
-        $centerY = $margin + $blockSize * $x + ($blockSize / 2);
+        $size = $this->getOption("block-size") / 1.5;
+        parent::drawBlock($x, $y);
         $this->image->draw()->ellipse(
-            new Point($centerX, $centerY),
-            new Box($blockSize, $blockSize),
-            $this->getColor(),
+            $this->getCell($x, $y)->getCenter(),
+            new Box($size, $size),
+            $this->getColor()->lighten(10),
             true
         );
     }
