@@ -7,11 +7,11 @@ class ExtraTypeIdenticonTest extends AbstractTypeIdenticonTest
     public function testTrianglePage()
     {
         $client = $this->createClient();
-        $client->request("GET", "/identity/triangle.png");
+        $client->request("GET", "/identity/pyramid.png");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertImageIsCorrect($response, "identity-triangle.png");
+        $this->assertImageIsCorrect($response, "identity-pyramid.png");
     }
 
     public function testCirclePage()

@@ -1,17 +1,12 @@
 <?php
 
-namespace Identicon\Tests\Types\Triangle;
+namespace Identicon\Tests\Types\Pyramid;
 
 use Identicon\AbstractIdenticonTest;
-use Identicon\Types\Triangle\Identicon;
+use Identicon\Types\Pyramid\Identicon;
 
 class IdenticonTest extends AbstractIdenticonTest
 {
-    protected function setUp()
-    {
-        $this->markTestSkipped("not now...");
-    }
-
     protected function createIdenticon($name, $options = array())
     {
         return new Identicon($name, $options);
