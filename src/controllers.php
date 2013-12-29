@@ -64,7 +64,7 @@ $app->get("/{name}", function(Request $request, $name) use ($app) {
     $response = new Response(
         $app["twig"]->render("profile.twig", array(
             "name" => $identity->getName(),
-            "types" => array("triangle", "circle", "star")
+            "types" => array("triangle", "circle", "rhombus")
         )),
         200,
         array(

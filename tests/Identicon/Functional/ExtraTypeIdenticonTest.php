@@ -24,14 +24,14 @@ class ExtraTypeIdenticonTest extends AbstractTypeIdenticonTest
         $this->assertImageIsCorrect($response, "identity-circle.png");
     }
 
-    public function testStarPage()
+    public function testRhombusPage()
     {
         $client = $this->createClient();
-        $client->request("GET", "/identity/star.png");
+        $client->request("GET", "/identity/rhombus.png");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertImageIsCorrect($response, "identity-star.png");
+        $this->assertImageIsCorrect($response, "identity-rhombus.png");
     }
 
 

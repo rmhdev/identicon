@@ -1,9 +1,9 @@
 <?php
 
-namespace Identicon\Tests\Types\Star;
+namespace Identicon\Tests\Types\Rhombus;
 
 use Identicon\AbstractIdenticonTest;
-use Identicon\Types\Star\Identicon;
+use Identicon\Types\Rhombus\Identicon;
 
 class IdenticonTest extends AbstractIdenticonTest
 {
