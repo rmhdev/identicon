@@ -1,8 +1,5 @@
 body > main .container {
-    margin: 0 auto 0 auto;
-    padding: 0 20px;
-    border-radius: 0 0 6px 6px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.15);
+
 }
 .header {
     margin-top: 15px;
@@ -37,10 +34,6 @@ body > main .container {
 -------------------------------------------------- */
 
 @media (min-width: 300px) and (max-width: 480px) {
-    body > main .container {
-        border-radius: 0;
-        box-shadow: none;
-    }
     .identicon-image-basic img {
         width: 250px;
         height: 250px;
@@ -86,7 +79,7 @@ body > main .container {
 .footer {
     text-align: center;
     padding: 30px 0;
-    margin-top: 70px;
+    margin-top: 10px;
     border-top: 1px solid #e5e5e5;
     background-color: #f5f5f5;
     font-size: 14px;
