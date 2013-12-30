@@ -9,16 +9,27 @@ class Identity
 
     protected
         $name,
+        $options,
         $hash,
         $blocks;
 
-    public function __construct($name)
+    public function __construct($name, $options = array())
     {
-        $this->prepareIdentification($name);
+        $this->options = $this->prepareOptions($options);
+        $this->initializeIdentification($name);
         $this->initializeBlocks();
     }
 
-    protected function prepareIdentification($identification)
+    protected function prepareOptions($options = array())
+    {
+        if (!isset($options["length"])) {
+            $options["length"] = 5;
+        }
+
+        return $options;
+    }
+
+    protected function initializeIdentification($identification)
     {
         $this->name = mb_convert_case($identification, MB_CASE_LOWER, "UTF-8");
         $this->hash = sha1($this->name);
@@ -69,7 +80,16 @@ class Identity
 
     public function getLength()
     {
-        return 5;
+        return $this->getOption("length");
+    }
+
+    protected function getOption($name, $default = NULL)
+    {
+        if (!isset($this->options[$name])) {
+            return $default;
+        }
+
+        return $this->options[$name];
     }
 
     /**

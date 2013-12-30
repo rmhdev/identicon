@@ -13,6 +13,12 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5, $identity->getLength());
     }
 
+    public function testIdentityCustomizedLength()
+    {
+        $identity = new Identity("name", array("length" => 7));
+        $this->assertEquals(7, $identity->getLength());
+    }
+
     public function testIdentityGetPosition()
     {
         $identity = new Identity("name");
