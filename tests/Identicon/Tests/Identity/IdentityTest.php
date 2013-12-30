@@ -93,7 +93,7 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($equalIdentities);
     }
 
-    public function symmetricOutputProvider()
+    public function symmetricOutputWithOddLengthProvider()
     {
         return array(
             array(0, 0, 4, 0),
@@ -110,11 +110,31 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider symmetricOutputProvider
+     * @dataProvider symmetricOutputWithOddLengthProvider
      */
-    public function testSymmetricOutput($leftX, $leftY, $rightX, $rightY)
+    public function testSymmetricOutputWithOddLength($leftX, $leftY, $rightX, $rightY)
     {
         $identity = new Identity("myidentity");
+
+        $blockLeft = $identity->getBlock($leftX, $leftY);
+        $blockRight = $identity->getBlock($rightX, $rightY);
+        $this->assertEquals($blockLeft->isColored(), $blockRight->isColored());
+    }
+
+    public function symmetricOutputWithEvenLengthProvider()
+    {
+        return array(
+            array(0, 0, 3, 0),
+            array(1, 0, 2, 0),
+        );
+    }
+
+    /**
+     * @dataProvider symmetricOutputWithEvenLengthProvider
+     */
+    public function testSymmetricOutputWithEvenLength($leftX, $leftY, $rightX, $rightY)
+    {
+        $identity = new Identity("myidentity", array("length" => 4));
 
         $blockLeft = $identity->getBlock($leftX, $leftY);
         $blockRight = $identity->getBlock($rightX, $rightY);
