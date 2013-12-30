@@ -3,6 +3,7 @@
 namespace Identicon\Identity;
 
 use Identicon\Exception\OutOfBoundsException;
+use Identicon\Exception\InvalidArgumentException;
 
 class Identity
 {
@@ -26,12 +27,16 @@ class Identity
             $options["length"] = 5;
         }
         $this->checkLength($options["length"]);
+        $options["length"] = (int) $options["length"];
 
         return $options;
     }
 
     protected function checkLength($length)
     {
+        if (!is_numeric($length)) {
+            throw new InvalidArgumentException();
+        }
         if ($length <= 0) {
             throw new OutOfBoundsException();
         }

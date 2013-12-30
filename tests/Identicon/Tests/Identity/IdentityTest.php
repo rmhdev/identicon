@@ -17,6 +17,12 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
     {
         $identity = new Identity("name", array("length" => 7));
         $this->assertEquals(7, $identity->getLength());
+
+        $identityB = new Identity("name", array("length" => "11"));
+        $this->assertEquals(11, $identityB->getLength());
+
+        $identityB = new Identity("name", array("length" => 8.7));
+        $this->assertEquals(8, $identityB->getLength());
     }
 
     /**
@@ -34,6 +40,14 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
             array(0),
             array(-1)
         );
+    }
+
+    /**
+     * @expectedException \Identicon\Exception\InvalidArgumentException
+     */
+    public function testLengthInvalidArgumentException()
+    {
+        $identity = new Identity("name", array("length" => "a"));
     }
 
     public function testIdentityGetPosition()
