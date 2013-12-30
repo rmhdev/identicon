@@ -24,7 +24,7 @@ abstract class AbstractIdenticon
 
     protected static $colorPalette = array(
         "AE6A5B", "AE945B", "9FAE5B", "75AE5B", "5BAE6A", "5BAE94", "5B9FAE", "5B75AE",
-        "6A5BAE", "945BAE", "AE5B9F", "AE5B75", "C28F84", "D7B5AD", "84B7C2", "#555555"
+        "6A5BAE", "945BAE", "AE5B9F", "AE5B75", "C28F84", "D7B5AD", "84B7C2", "555555"
     );
 
     public function __construct($value, $options = array())
