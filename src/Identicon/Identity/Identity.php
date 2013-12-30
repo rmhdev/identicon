@@ -26,13 +26,12 @@ class Identity
         if (!isset($options["length"])) {
             $options["length"] = 5;
         }
-        $this->checkLength($options["length"]);
-        $options["length"] = (int) $options["length"];
+        $options["length"] = $this->processLength($options["length"]);
 
         return $options;
     }
 
-    protected function checkLength($length)
+    protected function processLength($length)
     {
         if (!is_numeric($length)) {
             throw new InvalidArgumentException();
@@ -41,7 +40,7 @@ class Identity
             throw new OutOfBoundsException();
         }
 
-        return true;
+        return (int) $length;
     }
 
     protected function initializeIdentification($identification)
