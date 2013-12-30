@@ -9,23 +9,8 @@ use \Identicon\Type\Square\Identicon;
  * @return Response
  */
 
-$app->match("/", function(Request $request) use ($app) {
-    $name = $request->request->get("name");
-    if ($name) {
-        return $app->redirect("/{$name}");
-    }
-    $response = new Response(
-        $app["twig"]->render("index.twig", array("error" => $name ? false : true)),
-        200,
-        array(
-            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
-        )
-    );
-    $response->isNotModified($request);
-    $response->setEtag(md5($response->getContent()));
-
-    return $response;
-})->bind("index");
+$app->match("/",
+    'Identicon\Controller\BaseController::indexAction')->bind("index");
 
 $app->get("/{name}.png", function(Request $request, $name) use ($app) {
     $identicon = new Identicon($name);
@@ -58,9 +43,6 @@ $app->get("/{name}/{type}.png", function(Request $request, $name, $type) use ($a
 
 $app->get("/{name}", function(Request $request, $name) use ($app) {
     $identity = new Identity($name);
-
-    //print_r($identity->__toString()); die();
-
     $response = new Response(
         $app["twig"]->render("profile.twig", array(
             "name" => $identity->getName(),
