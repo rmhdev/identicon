@@ -130,8 +130,8 @@ class Identity
     public function __toString()
     {
         $printedRows = array($this->getCode());
-        for ($x = 0; $x < $this->getLength(); $x++) {
-            $printedRows[] = $this->printRow($x);
+        for ($row = 0; $row < $this->getLength(); $row++) {
+            $printedRows[] = $this->printRow($row);
         }
 
         return implode("/", $printedRows);
@@ -140,8 +140,8 @@ class Identity
     protected function printRow($x)
     {
         $row = "";
-        for ($y = 0; $y < $this->getLength(); $y++) {
-            $row .= $this->getBlock($x, $y)->__toString();
+        for ($col = 0; $col < $this->getLength(); $col++) {
+            $row .= $this->getBlock($x, $col)->__toString();
         }
 
         return $row;
