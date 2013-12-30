@@ -19,6 +19,23 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(7, $identity->getLength());
     }
 
+    /**
+     * @dataProvider lengthOutOfBoundsProvider
+     * @expectedException \Identicon\Exception\OutOfBoundsException
+     */
+    public function testLengthOutOfBoundsException($length)
+    {
+        $identity = new Identity("name", array("length" => $length));
+    }
+
+    public function lengthOutOfBoundsProvider()
+    {
+        return array(
+            array(0),
+            array(-1)
+        );
+    }
+
     public function testIdentityGetPosition()
     {
         $identity = new Identity("name");

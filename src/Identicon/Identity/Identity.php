@@ -25,8 +25,18 @@ class Identity
         if (!isset($options["length"])) {
             $options["length"] = 5;
         }
+        $this->checkLength($options["length"]);
 
         return $options;
+    }
+
+    protected function checkLength($length)
+    {
+        if ($length <= 0) {
+            throw new OutOfBoundsException();
+        }
+
+        return true;
     }
 
     protected function initializeIdentification($identification)
