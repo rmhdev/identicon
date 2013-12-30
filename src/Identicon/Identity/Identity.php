@@ -80,6 +80,7 @@ class Identity
 
     protected function calculateValueForPosition($posX, $posY)
     {
+        //print_r($this->hash); die();
         return hexdec(substr($this->hash, $this->calculateCharPosition($posX, $posY), 1));
     }
 
@@ -88,8 +89,9 @@ class Identity
         if ($posX > $this->getLength() / 2) {
             $posX = $this->getLength() - $posX - 1;
         }
+        $position = $posY * ceil($this->getLength() / 2) + $posX;
 
-        return $posY * $this->getLength() + $posX;
+        return $position % strlen($this->hash);
     }
 
     public function getLength()
