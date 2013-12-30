@@ -160,6 +160,13 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCustomizedBlockNumber()
+    {
+        $identicon = $this->createIdenticon("myIdentity", array("blocks" => 7));
+        $expectedWidth = 35*2 + 7*70;
+        $this->assertEquals($expectedWidth, $identicon->getWidth());
+    }
+
     /**
      * @param $name
      * @param array $options

@@ -12,6 +12,7 @@ use Imagine\Image\Color;
 abstract class AbstractIdenticon
 {
     const
+        BLOCKS = 5,
         MARGIN = 35,
         BLOCK_SIZE = 70,
         BACKGROUND_COLOR = "f0f0f0";
@@ -29,7 +30,7 @@ abstract class AbstractIdenticon
     public function __construct($value, $options = array())
     {
         $this->options = $this->processOptions($options);
-        $this->identity = new Identity($value);
+        $this->identity = new Identity($value, array("length" => $this->getOption("blocks")));
         $this->image = $this->createImage();
         $this->drawIdentity();
     }
@@ -50,6 +51,10 @@ abstract class AbstractIdenticon
             $options["background-color"] = self::BACKGROUND_COLOR;
         }
         $this->checkValueBackgroundColor($options["background-color"]);
+
+        if (!isset($options["blocks"])) {
+            $options["blocks"] = self::BLOCKS;
+        }
 
         return $options;
     }
