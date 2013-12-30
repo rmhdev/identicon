@@ -1,9 +1,9 @@
 <?php
 
-namespace Identicon\Tests\Types\Square;
+namespace Identicon\Tests\Type\Pyramid;
 
 use Identicon\AbstractIdenticonTest;
-use Identicon\Types\Square\Identicon;
+use Identicon\Type\Pyramid\Identicon;
 
 class IdenticonTest extends AbstractIdenticonTest
 {

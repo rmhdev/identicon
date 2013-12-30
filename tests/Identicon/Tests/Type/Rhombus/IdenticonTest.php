@@ -1,9 +1,9 @@
 <?php
 
-namespace Identicon\Tests\Types\Pyramid;
+namespace Identicon\Tests\Type\Rhombus;
 
 use Identicon\AbstractIdenticonTest;
-use Identicon\Types\Pyramid\Identicon;
+use Identicon\Type\Rhombus\Identicon;
 
 class IdenticonTest extends AbstractIdenticonTest
 {

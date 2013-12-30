@@ -3,7 +3,7 @@
 use \Symfony\Component\HttpFoundation\Response;
 use \Symfony\Component\HttpFoundation\Request;
 use Identicon\Identity\Identity;
-use \Identicon\Types\Square\Identicon;
+use \Identicon\Type\Square\Identicon;
 
 /* @var \Silex\Application $app
  * @return Response
@@ -40,7 +40,7 @@ $app->get("/{name}.png", function(Request $request, $name) use ($app) {
 })->bind("basic");
 
 $app->get("/{name}/{type}.png", function(Request $request, $name, $type) use ($app) {
-    $class = sprintf('\Identicon\Types\%s\Identicon', ucfirst($type));
+    $class = sprintf('\Identicon\Type\%s\Identicon', ucfirst($type));
     if (!class_exists($class)) {
         return new Response("Error", 404);
     }

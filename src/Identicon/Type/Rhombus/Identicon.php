@@ -1,6 +1,6 @@
 <?php
 
-namespace Identicon\Types\Rhombus;
+namespace Identicon\Type\Rhombus;
 
 use Identicon\AbstractIdenticon;
 use Imagine\Image\Point;

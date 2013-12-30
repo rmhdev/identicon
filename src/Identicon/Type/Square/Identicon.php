@@ -1,6 +1,6 @@
 <?php
 
-namespace Identicon\Types\Square;
+namespace Identicon\Type\Square;
 
 use Identicon\AbstractIdenticon;
 use Imagine\Image\Point;

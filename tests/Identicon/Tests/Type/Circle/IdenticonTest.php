@@ -1,9 +1,9 @@
 <?php
 
-namespace Identicon\Tests\Types;
+namespace Identicon\Tests\Type;
 
 use Identicon\AbstractIdenticonTest;
-use Identicon\Types\Circle\Identicon;
+use Identicon\Type\Circle\Identicon;
 
 class IdenticonTest extends AbstractIdenticonTest
 {

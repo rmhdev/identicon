@@ -1,6 +1,6 @@
 <?php
 
-namespace Identicon\Types\Pyramid;
+namespace Identicon\Type\Pyramid;
 
 use Identicon\AbstractIdenticon;
 use Imagine\Image\Point;

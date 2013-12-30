@@ -1,6 +1,6 @@
 <?php
 
-namespace Identicon\Types\Circle;
+namespace Identicon\Type\Circle;
 
 use Identicon\AbstractIdenticon;
 use Imagine\Image\Box;
