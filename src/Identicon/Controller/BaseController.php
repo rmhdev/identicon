@@ -2,7 +2,6 @@
 
 namespace Identicon\Controller;
 
-use Identicon\AbstractIdenticon;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Silex\Application;
@@ -25,17 +24,17 @@ class BaseController
         }
         $options = array("error" => $name ? false : true);
 
-        return $this->createTwigResponse($request, $app, "index.twig", $options);
+        return $this->createResponse($request, $app["twig"]->render("index.twig", $options));
     }
 
-    protected function createTwigResponse(Request $request, Application $app, $fileName, $options = array())
+    protected function createResponse(Request $request, $content, $headers = array())
     {
         $response = new Response(
-            $app["twig"]->render($fileName, $options),
+            $content,
             200,
-            array(
+            array_merge($headers, array(
                 "Cache-Control" => "public, max-age=3600, s-maxage=3600"
-            )
+            ))
         );
         $response->isNotModified($request);
         $response->setEtag(md5($response->getContent()));
@@ -47,19 +46,7 @@ class BaseController
     {
         $identicon = new Identicon($name);
 
-        return $this->createIdenticonResponse($request, $identicon);
-    }
-
-    protected function createIdenticonResponse(Request $request, AbstractIdenticon $identicon)
-    {
-        $response = new Response($identicon->getContent(), 200, array(
-            "Content-Type" => "image/png",
-            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
-        ));
-        $response->isNotModified($request);
-        $response->setEtag(md5($response->getContent()));
-
-        return $response;
+        return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => "image/png"));
     }
 
     public function extraAction(Request $request, $type, $name)
@@ -71,7 +58,7 @@ class BaseController
         $identicon = new $class($name);
         /* @var \Identicon\AbstractIdenticon $identicon */
 
-        return $this->createIdenticonResponse($request, $identicon);
+        return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => "image/png"));
     }
 
     public function profileAction(Request $request, Application $app, $name)
@@ -82,6 +69,6 @@ class BaseController
             "types" => array("pyramid", "circle", "rhombus")
         );
 
-        return $this->createTwigResponse($request, $app, "profile.twig", $options);
+        return $this->createResponse($request, $app["twig"]->render("profile.twig", $options));
     }
 }
