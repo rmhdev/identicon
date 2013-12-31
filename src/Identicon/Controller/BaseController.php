@@ -2,6 +2,7 @@
 
 namespace Identicon\Controller;
 
+use Identicon\AbstractIdenticon;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Silex\Application;
@@ -45,6 +46,12 @@ class BaseController
     public function basicAction(Request $request, $name)
     {
         $identicon = new Identicon($name);
+
+        return $this->createIdenticonResponse($request, $identicon);
+    }
+
+    protected function createIdenticonResponse(Request $request, AbstractIdenticon $identicon)
+    {
         $response = new Response($identicon->getContent(), 200, array(
             "Content-Type" => "image/png",
             "Cache-Control" => "public, max-age=3600, s-maxage=3600"
@@ -63,14 +70,8 @@ class BaseController
         }
         $identicon = new $class($name);
         /* @var \Identicon\AbstractIdenticon $identicon */
-        $response = new Response($identicon->getContent(), 200, array(
-            "Content-Type" => "image/png",
-            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
-        ));
-        $response->isNotModified($request);
-        $response->setEtag(md5($response->getContent()));
 
-        return $response;
+        return $this->createIdenticonResponse($request, $identicon);
     }
 
     public function profileAction(Request $request, Application $app, $name)
