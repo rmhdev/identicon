@@ -22,8 +22,15 @@ class BaseController
         if ($name) {
             return $app->redirect("/{$name}");
         }
+        $options = array("error" => $name ? false : true);
+
+        return $this->createTwigResponse($request, $app, "index.twig", $options);
+    }
+
+    protected function createTwigResponse(Request $request, Application $app, $fileName, $options = array())
+    {
         $response = new Response(
-            $app["twig"]->render("index.twig", array("error" => $name ? false : true)),
+            $app["twig"]->render($fileName, $options),
             200,
             array(
                 "Cache-Control" => "public, max-age=3600, s-maxage=3600"
@@ -35,9 +42,8 @@ class BaseController
         return $response;
     }
 
-    public function basicAction(Request $request, Application $app)
+    public function basicAction(Request $request, $name)
     {
-        $name = $request->request->get("name");
         $identicon = new Identicon($name);
         $response = new Response($identicon->getContent(), 200, array(
             "Content-Type" => "image/png",
@@ -70,19 +76,11 @@ class BaseController
     public function profileAction(Request $request, Application $app, $name)
     {
         $identity = new Identity($name);
-        $response = new Response(
-            $app["twig"]->render("profile.twig", array(
-                "name" => $identity->getName(),
-                "types" => array("pyramid", "circle", "rhombus")
-            )),
-            200,
-            array(
-                "Cache-Control" => "public, max-age=3600, s-maxage=3600"
-            )
+        $options = array(
+            "name" => $identity->getName(),
+            "types" => array("pyramid", "circle", "rhombus")
         );
-        $response->isNotModified($request);
-        $response->setEtag(md5($response->getContent()));
 
-        return $response;
+        return $this->createTwigResponse($request, $app, "profile.twig", $options);
     }
 }
