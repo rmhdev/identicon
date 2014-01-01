@@ -8,7 +8,7 @@ class ProfileTest extends WebTestCase
 {
     public function createApplication()
     {
-        return require __DIR__ . "/../../../src/production.php";
+        return require __DIR__ . "/../../../src/env_test.php";
     }
 
     public function testLoadingProfilePage()

@@ -8,7 +8,7 @@ class IndexTest extends WebTestCase
 {
     public function createApplication()
     {
-        return require __DIR__ . "/../../../src/production.php";
+        return require __DIR__ . "/../../../src/env_test.php";
     }
 
     public function testLoadingIndexPage()
@@ -58,7 +58,6 @@ class IndexTest extends WebTestCase
         $form = $crawler->selectButton('generate')->form();
         $client->submit($form, array("name" => 'mytest'));
 
-        //$this->assertTrue($client->getResponse()->isRedirect());
         $this->assertStringEndsWith("/mytest", $client->getHistory()->current()->getUri());
     }
 

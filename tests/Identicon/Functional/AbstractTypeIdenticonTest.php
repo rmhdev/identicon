@@ -2,7 +2,6 @@
 
 namespace Identicon\Tests;
 
-use Identicon\AbstractIdenticon;
 use Silex\WebTestCase;
 use Imagine\Gd\Imagine;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,21 +10,7 @@ abstract class AbstractTypeIdenticonTest extends WebTestCase
 {
     public function createApplication()
     {
-        $app = require __DIR__ . "/../../../src/production.php";
-        $app["identicon.config"] = array_merge(
-            $app["identicon.config"], array(
-                "blocks" => AbstractIdenticon::BLOCKS,
-                "block-size" => AbstractIdenticon::BLOCK_SIZE,
-                "margin" => AbstractIdenticon::MARGIN,
-                "background-color" => AbstractIdenticon::BACKGROUND_COLOR
-        ));
-        $app["identicon.type"] = array_merge(
-            $app["identicon.type"], array(
-                "default" => "square"
-            )
-        );
-
-        return $app;
+        return require __DIR__ . "/../../../src/env_test.php";
     }
 
     public function setUp()
@@ -76,6 +61,7 @@ abstract class AbstractTypeIdenticonTest extends WebTestCase
 
         $imagine = $this->createImagine();
         $image = $imagine->open($filename);
+        //$widthHeight =
         $this->assertEquals(420, $image->getSize()->getWidth());
         $this->assertEquals(420, $image->getSize()->getHeight());
     }
