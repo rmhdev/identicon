@@ -12,9 +12,8 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
     'http_cache.esi'        => null
 ));
 
-$env = getenv('APP_ENV') ?: 'prod';
 $folder = __DIR__ . "/../config/";
-$file = file_exists($folder . "$env.json") ? "$env.json" : "$env.json.dist";
+$file = file_exists($folder . "parameters.json") ? "parameters.json" : "parameters.json.dist";
 $app->register( new Igorw\Silex\ConfigServiceProvider($folder . $file), array(
 
 ));

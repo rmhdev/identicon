@@ -1,12 +1,7 @@
 <?php
-require_once __DIR__ . "/../vendor/autoload.php";
+/* @var $app \Silex\Application */
+$app = require_once __DIR__ . "/production.php";
 
-putenv("APP_ENV=dev");
-
-/* @var \Silex\Application $app */
-$app = require __DIR__ . "/app.php";
-
-require __DIR__ . "/providers.php";
-require __DIR__ . "/controllers.php";
+$app["debug"] = true;
 
 return $app;
