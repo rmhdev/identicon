@@ -87,7 +87,7 @@ abstract class AbstractIdenticon
 
     public function getContent()
     {
-        return $this->image->get("png");
+        return $this->image->get("png", array("quality" => 0));
     }
 
     protected function createImage()
