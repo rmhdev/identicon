@@ -42,20 +42,20 @@ class BaseController
         return $response;
     }
 
-    public function basicAction(Request $request, $name)
+    public function basicAction(Request $request, Application $app, $name)
     {
-        $identicon = new Identicon($name);
+        $identicon = new Identicon($name, $app["identicon.config"]);
 
         return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => "image/png"));
     }
 
-    public function extraAction(Request $request, $type, $name)
+    public function extraAction(Request $request, Application $app, $type, $name)
     {
         $class = sprintf('\Identicon\Type\%s\Identicon', ucfirst($type));
         if (!class_exists($class)) {
             return new Response("Error", 404);
         }
-        $identicon = new $class($name);
+        $identicon = new $class($name, $app["identicon.config"]);
         /* @var \Identicon\AbstractIdenticon $identicon */
 
         return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => "image/png"));
