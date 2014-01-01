@@ -27,8 +27,9 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("image/png", $mimeType);
 
         $image = $this->createImage($filename);
-        $this->assertEquals(420, $image->getSize()->getWidth());
-        $this->assertEquals(420, $image->getSize()->getHeight());
+        $widthHeight = AbstractIdenticon::MARGIN*2 + AbstractIdenticon::BLOCK_SIZE*AbstractIdenticon::BLOCKS;
+        $this->assertEquals($widthHeight, $image->getSize()->getWidth());
+        $this->assertEquals($widthHeight, $image->getSize()->getHeight());
         unlink($filename);
     }
 
