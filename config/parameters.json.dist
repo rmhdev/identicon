@@ -4,5 +4,6 @@
         "block-size": 70,
         "margin": 35,
         "background-color": "f0f0f0"
-    }
+    },
+    "identicon.type": "square"
 }

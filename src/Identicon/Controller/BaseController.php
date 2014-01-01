@@ -5,7 +5,6 @@ namespace Identicon\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Silex\Application;
-use Identicon\Type\Square\Identicon;
 use Identicon\Identity\Identity;
 
 /**
@@ -44,19 +43,39 @@ class BaseController
 
     public function basicAction(Request $request, Application $app, $name)
     {
-        $identicon = new Identicon($name, $app["identicon.config"]);
+        $identicon = $this->createIdenticon($app, $name);
+        if (!$identicon) {
+            return new Response("Error", 404);
+        }
 
         return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => "image/png"));
     }
 
-    public function extraAction(Request $request, Application $app, $type, $name)
+    /**
+     * @param Application $app
+     * @param $name
+     * @param null $type
+     * @return \Identicon\AbstractIdenticon
+     */
+    protected function createIdenticon(Application $app, $name, $type = NULL)
     {
+        if (!$type) {
+            $type = $app["identicon.type"];
+        }
         $class = sprintf('\Identicon\Type\%s\Identicon', ucfirst($type));
         if (!class_exists($class)) {
+            return NULL;
+        }
+
+        return new $class($name, $app["identicon.config"]);
+    }
+
+    public function extraAction(Request $request, Application $app, $type, $name)
+    {
+        $identicon = $this->createIdenticon($app, $name, $type);
+        if (!$identicon) {
             return new Response("Error", 404);
         }
-        $identicon = new $class($name, $app["identicon.config"]);
-        /* @var \Identicon\AbstractIdenticon $identicon */
 
         return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => "image/png"));
     }
