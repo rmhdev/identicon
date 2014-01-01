@@ -2,6 +2,7 @@
 
 namespace Identicon\Tests;
 
+use Identicon\AbstractIdenticon;
 use Silex\WebTestCase;
 use Imagine\Gd\Imagine;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +11,21 @@ abstract class AbstractTypeIdenticonTest extends WebTestCase
 {
     public function createApplication()
     {
-        return require __DIR__ . "/../../../src/production.php";
+        $app = require __DIR__ . "/../../../src/production.php";
+        $app["identicon.config"] = array_merge(
+            $app["identicon.config"], array(
+                "blocks" => AbstractIdenticon::BLOCKS,
+                "block-size" => AbstractIdenticon::BLOCK_SIZE,
+                "margin" => AbstractIdenticon::MARGIN,
+                "background-color" => AbstractIdenticon::BACKGROUND_COLOR
+        ));
+        $app["identicon.type"] = array_merge(
+            $app["identicon.type"], array(
+                "default" => "square"
+            )
+        );
+
+        return $app;
     }
 
     public function setUp()
