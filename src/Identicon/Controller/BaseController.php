@@ -60,7 +60,7 @@ class BaseController
     protected function createIdenticon(Application $app, $name, $type = NULL)
     {
         if (!$type) {
-            $type = $app["identicon.type"];
+            $type = $app["identicon.type"]["default"];
         }
         $class = sprintf('\Identicon\Type\%s\Identicon', ucfirst($type));
         if (!class_exists($class)) {
