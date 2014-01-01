@@ -42,8 +42,7 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
         for ($x = 0; $x < $length; $x++) {
             for ($y = 0; $y < $length; $y++) {
                 $backgroundColor = (string) $identicon->getBackgroundColor();
-                $centerX = 35 + $x*70 + 70/2;
-                $centerY = 35 + $y*70 + 70/2;
+                list($centerX, $centerY) = $this->calculateCenter($x, $y);
                 $color = $image->getColorAt(new Point($centerX, $centerY));
                 $comment = "position [{$x}, {$y}]: {$centerX}px, {$centerY}px";
                 if ($identicon->getIdentity()->getBlock($x, $y)->isColored()) {
@@ -54,6 +53,16 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
             }
         }
         unlink($filename);
+    }
+
+    protected function calculateCenter($x, $y)
+    {
+        $calc = AbstractIdenticon::MARGIN + AbstractIdenticon::BLOCK_SIZE/2;
+
+        return array(
+            $calc + $x*AbstractIdenticon::BLOCK_SIZE,
+            $calc + $y*AbstractIdenticon::BLOCK_SIZE
+        );
     }
 
     protected function createFile(AbstractIdenticon $identicon)
@@ -108,7 +117,7 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
     public function testPersonalizedMargin()
     {
         $identicon = $this->createIdenticon("myidentity", array("margin" => 10));
-        $expectedWidth = 10*2 + 5*70;
+        $expectedWidth = 10*2 + AbstractIdenticon::BLOCKS*AbstractIdenticon::BLOCK_SIZE;
         $this->assertEquals($expectedWidth, $identicon->getWidth());
 
         $expectedHeight = $expectedWidth;
@@ -136,7 +145,7 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
     public function testPersonalizedBlockSize()
     {
         $identicon = $this->createIdenticon("myIdentity", array("block-size" => 50));
-        $expectedWidth = 35*2 + 5*50;
+        $expectedWidth = AbstractIdenticon::MARGIN*2 + AbstractIdenticon::BLOCKS*50;
         $this->assertEquals($expectedWidth, $identicon->getWidth());
 
         $expectedHeight = $expectedWidth;
@@ -163,7 +172,7 @@ abstract class AbstractIdenticonTest extends \PHPUnit_Framework_TestCase
     public function testCustomizedBlockNumber()
     {
         $identicon = $this->createIdenticon("myIdentity", array("blocks" => 7));
-        $expectedWidth = 35*2 + 7*70;
+        $expectedWidth = AbstractIdenticon::MARGIN*2 + 7*AbstractIdenticon::BLOCK_SIZE;
         $this->assertEquals($expectedWidth, $identicon->getWidth());
     }
 
