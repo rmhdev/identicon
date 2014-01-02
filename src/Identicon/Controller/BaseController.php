@@ -85,7 +85,7 @@ class BaseController
         $identity = new Identity($name);
         $options = array(
             "name" => $identity->getName(),
-            "types" => array("pyramid", "circle", "rhombus")
+            "types" => $app["identicon.type"]["extra"]
         );
 
         return $this->createResponse($request, $app["twig"]->render("profile.twig", $options));

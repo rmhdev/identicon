@@ -76,8 +76,12 @@ class ProfileTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/myidentity");
+        $extraTypes = $this->app["identicon.type"]["extra"];
 
-        $this->assertGreaterThanOrEqual(1, $crawler->filter('.container .identicon-extras a')->count());
+        $this->assertGreaterThanOrEqual(
+            sizeof($extraTypes),
+            $crawler->filter('.container .identicon-extras a')->count()
+        );
     }
 
 }
