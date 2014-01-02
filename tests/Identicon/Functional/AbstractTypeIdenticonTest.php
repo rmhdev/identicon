@@ -2,6 +2,7 @@
 
 namespace Identicon\Tests;
 
+use Identicon\AbstractIdenticon;
 use Silex\WebTestCase;
 use Imagine\Gd\Imagine;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,8 +62,8 @@ abstract class AbstractTypeIdenticonTest extends WebTestCase
 
         $imagine = $this->createImagine();
         $image = $imagine->open($filename);
-        //$widthHeight =
-        $this->assertEquals(420, $image->getSize()->getWidth());
-        $this->assertEquals(420, $image->getSize()->getHeight());
+        $widthHeight = AbstractIdenticon::MARGIN*2 + AbstractIdenticon::BLOCKS*AbstractIdenticon::BLOCK_SIZE;
+        $this->assertEquals($widthHeight, $image->getSize()->getWidth());
+        $this->assertEquals($widthHeight, $image->getSize()->getHeight());
     }
 }
