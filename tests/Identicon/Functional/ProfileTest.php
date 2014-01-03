@@ -3,6 +3,7 @@
 namespace Identicon\Tests;
 
 use Silex\WebTestCase;
+use Symfony\Component\HttpKernel\Client;
 
 class ProfileTest extends WebTestCase
 {
@@ -78,7 +79,7 @@ class ProfileTest extends WebTestCase
         $crawler = $client->request("GET", "/myidentity");
         $extraTypes = $this->app["identicon.type"]["extra"];
 
-        $this->assertGreaterThanOrEqual(
+        $this->assertEquals(
             sizeof($extraTypes),
             $crawler->filter('.container .identicon-extras a')->count()
         );
