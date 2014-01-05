@@ -3,7 +3,6 @@
 namespace Identicon\Tests;
 
 use Silex\WebTestCase;
-use Symfony\Component\HttpKernel\Client;
 
 class ProfileTest extends WebTestCase
 {
