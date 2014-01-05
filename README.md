@@ -4,7 +4,20 @@ Identicon generator built with [Silex](http://silex.sensiolabs.org) and [Imagine
 
 [![Build Status](https://travis-ci.org/rmhdev/identicon.png)](https://travis-ci.org/rmhdev/identicon)
 
+**What is an identicon?** (from [wikipedia](http://en.wikipedia.org/wiki/Identicon))
+
+>It is a visual representation of a hash value [...] that serves to
+identify a user of a computer system as a form of avatar while protecting
+the users' privacy.
+
+This project will help you to associate an avatar with a user.
+For example, if you want to get `username`'s identicon, you only have to use the next URL:
+
+[identicon.rmhdev.net/username.png](http://identicon.rmhdev.net/username.png)
+
 ## Installation
+
+WORK IN PROGRESS.
 
 Get the source code of the project from GitHub. You have two options:
 
