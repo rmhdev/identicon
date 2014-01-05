@@ -13,7 +13,11 @@ the users' privacy.
 This project will help you to associate an avatar with a user.
 For example, if you want to get `username`'s identicon, you only have to use the next URL:
 
-[identicon.rmhdev.net/username.png](http://identicon.rmhdev.net/username.png)
+```
+http://your-identicon-server/username.png
+```
+
+You can check an online [demo](http://identicon.rmhdev.net).
 
 ## Installation
 
