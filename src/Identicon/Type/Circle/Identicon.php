@@ -10,7 +10,7 @@ class Identicon extends AbstractIdenticon
 {
     protected function drawBlock($x, $y)
     {
-        $size = $this->getOption("block-size") / 1.5;
+        $size = $this->getOption("block-size") / 1.75;
         parent::drawBlock($x, $y);
         $this->image->draw()->ellipse(
             $this->getCell($x, $y)->getCenter(),
