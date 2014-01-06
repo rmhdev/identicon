@@ -9,7 +9,7 @@ use \Symfony\Component\HttpFoundation\Response;
 $app->match("/",
     'Identicon\Controller\BaseController::indexAction')->bind("index");
 
-$app->get("/{name}.png",
+$app->get("/{name}.{format}",
     'Identicon\Controller\BaseController::basicAction')->bind("basic");
 
 $app->get("/{name}/{type}.png",

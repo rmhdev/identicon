@@ -25,4 +25,13 @@ class BasicTypeIdenticonTest extends AbstractTypeIdenticonTest
         //$requestA = $client->getRequest();
         //$this->assertFalse($response->isNotModified($requestA));
     }
+
+    public function testIncorrectFormat()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/identity.jpg");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isClientError());
+    }
 }

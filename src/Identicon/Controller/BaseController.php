@@ -41,14 +41,24 @@ class BaseController
         return $response;
     }
 
-    public function basicAction(Request $request, Application $app, $name)
+    public function basicAction(Request $request, Application $app, $name, $format = "png")
     {
         $identicon = $this->createIdenticon($app, $name);
-        if (!$identicon) {
+        $contentType = $this->getContentType($format);
+        if (!$identicon || !$contentType) {
             return new Response("Error", 404);
         }
 
-        return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => "image/png"));
+        return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => $contentType));
+    }
+
+    protected function getContentType($format)
+    {
+        if (strcasecmp($format, "png") === 0) {
+            return "image/png";
+        }
+
+        return "";
     }
 
     /**

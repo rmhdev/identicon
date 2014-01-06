@@ -3,7 +3,7 @@
 {% block title %}{{ name }} - {% endblock %}
 {% block description %}Identicon profile for {{ name }}{% endblock %}
 {% block header %}{{ name }}{% endblock %}
-{% set basic = url("basic", { "name": name }) %}
+{% set basic = url("basic", { "name": name, "format": "png" }) %}
 
 {% block content %}
 
