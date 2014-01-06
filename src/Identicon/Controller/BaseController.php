@@ -46,7 +46,7 @@ class BaseController
         $identicon = $this->createIdenticon($app, $name);
         $contentType = $this->getContentType($format);
         if (!$identicon || !$contentType) {
-            return new Response("Error", 404);
+            return $this->createErrorResponse($app);
         }
 
         return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => $contentType));
@@ -85,7 +85,7 @@ class BaseController
         $identicon = $this->createIdenticon($app, $name, $type);
         $contentType = $this->getContentType($format);
         if (!$identicon || !$contentType) {
-            return new Response("Error", 404);
+            return $this->createErrorResponse($app);
         }
 
         return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => $contentType));
@@ -101,5 +101,17 @@ class BaseController
         );
 
         return $this->createResponse($request, $app["twig"]->render("profile.twig", $options));
+    }
+
+    public function createErrorResponse(Application $app)
+    {
+        $options = array(
+            "code" => 404
+        );
+
+        return new Response(
+            $app["twig"]->render("error.twig", $options),
+            404
+        );
     }
 }
