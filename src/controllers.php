@@ -12,7 +12,7 @@ $app->match("/",
 $app->get("/{name}.{format}",
     'Identicon\Controller\BaseController::basicAction')->bind("basic");
 
-$app->get("/{name}/{type}.png",
+$app->get("/{name}/{type}.{format}",
     'Identicon\Controller\BaseController::extraAction')->bind("extra");
 
 $app->get("/{name}",

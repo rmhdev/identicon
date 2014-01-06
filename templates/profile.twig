@@ -3,7 +3,7 @@
 {% block title %}{{ name }} - {% endblock %}
 {% block description %}Identicon profile for {{ name }}{% endblock %}
 {% block header %}{{ name }}{% endblock %}
-{% set basic = url("basic", { "name": name, "format": "png" }) %}
+{% set basic = url("basic", { "name": name, "format": format }) %}
 
 {% block content %}
 
@@ -15,7 +15,7 @@
     <section class="identicon-extras text-center">
         <div class="btn-group-vertical center-block">
         {% for type in types %}
-        {% set extra = url("extra", { "name": name, "type": type }) %}
+        {% set extra = url("extra", { "name": name, "type": type, "format": format }) %}
         <a href="{{ extra }}" class="btn btn-default btn-lg">Type {{ type }}</a>
         {% endfor %}
         </div>

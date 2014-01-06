@@ -63,4 +63,13 @@ class ExtraTypeIdenticonTest extends AbstractTypeIdenticonTest
         $this->assertEquals(3600, $response->getMaxAge());
         $this->assertTrue($response->isValidateable());
     }
+
+    public function testUnknownFormat()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/identity/pyramid.jpg");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isClientError());
+    }
 }

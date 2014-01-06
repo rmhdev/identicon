@@ -80,14 +80,15 @@ class BaseController
         return new $class($name, $app["identicon.config"]);
     }
 
-    public function extraAction(Request $request, Application $app, $type, $name)
+    public function extraAction(Request $request, Application $app, $type, $name, $format = "png")
     {
         $identicon = $this->createIdenticon($app, $name, $type);
-        if (!$identicon) {
+        $contentType = $this->getContentType($format);
+        if (!$identicon || !$contentType) {
             return new Response("Error", 404);
         }
 
-        return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => "image/png"));
+        return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => $contentType));
     }
 
     public function profileAction(Request $request, Application $app, $name)
@@ -95,7 +96,8 @@ class BaseController
         $identity = new Identity($name);
         $options = array(
             "name" => $identity->getName(),
-            "types" => $app["identicon.type"]["extra"]
+            "types" => $app["identicon.type"]["extra"],
+            "format" => "png"
         );
 
         return $this->createResponse($request, $app["twig"]->render("profile.twig", $options));
