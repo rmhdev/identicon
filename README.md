@@ -24,17 +24,17 @@ You can check the [online demo](http://identicon.rmhdev.net).
 
 ## Installation
 
-WORK IN PROGRESS.
-
 Get the source code of the project from GitHub. You have two options:
 
 A. Clone it:
 
 ```bash
-git clone git@github.com:rmhdev/identicon.git --branch 1.0 /YOUR/INSTALLATION/FOLDER
+git clone git@github.com:rmhdev/identicon.git /YOUR/FOLDER
 ```
 
-B. Download the [latest release](https://github.com/rmhdev/identicon/releases) and copy it to your installation folder.
+B. Download it:
+
+Check the [latest release](https://github.com/rmhdev/identicon/releases) and copy it to your installation folder.
 
 ### Project dependencies
 
