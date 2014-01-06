@@ -69,7 +69,7 @@ The default values are:
         "background-color": "f0f0f0"
     },
     "identicon.type": {
-        "default": "square",
+        "default": "plain",
         "extra": ["circle", "pyramid", "rhombus"]
     }
 }
@@ -77,9 +77,9 @@ The default values are:
 
 ### Default Identicon types
 
-Square, pyramid, circle and rhombus
+Plain, pyramid, circle and rhombus
 
-![Square type](doc/square.png)
+![Plain type](doc/plain.png)
 ![Pyramid type](doc/pyramid.png)
 ![Circle type](doc/circle.png)
 ![Rhombus type](doc/rhombus.png)

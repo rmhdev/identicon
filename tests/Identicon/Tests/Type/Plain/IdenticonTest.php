@@ -1,9 +1,9 @@
 <?php
 
-namespace Identicon\Tests\Type\Square;
+namespace Identicon\Tests\Type\Plain;
 
 use Identicon\AbstractIdenticonTest;
-use Identicon\Type\Square\Identicon;
+use Identicon\Type\Plain\Identicon;
 
 class IdenticonTest extends AbstractIdenticonTest
 {

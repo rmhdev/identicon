@@ -6,7 +6,7 @@
         "background-color": "f0f0f0"
     },
     "identicon.type": {
-        "default": "square",
+        "default": "plain",
         "extra": ["circle", "pyramid", "rhombus"]
     }
 }

@@ -8,7 +8,7 @@ $app = require __DIR__ . "/app.php";
 $app["identicon.config"] = array();
 $app["identicon.type"] = array_merge(
     $app["identicon.type"], array(
-        "default" => "square",
+        "default" => "plain",
         "extra" => array("circle", "pyramid", "rhombus")
 ));
 
