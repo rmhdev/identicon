@@ -75,6 +75,41 @@ The default values are:
 }
 ```
 
+### Default Identicon types
+
+Square, pyramid, circle and rhombus
+
+![Square type](doc/square.png)
+![Pyramid type](doc/pyramid.png)
+![Circle type](doc/circle.png)
+![Rhombus type](doc/rhombus.png)
+
+### Create your own Identicons
+
+Take a look at `src/Identicon/Type/`. If you want to create a new Identicon type,
+add a new folder and extend the `AbstractIdenticon` class. For example:
+
+```php
+<?php
+
+namespace Identicon\Type\MyType;
+
+use Identicon\AbstractIdenticon;
+use Imagine\Image\Point;
+
+class Identicon extends AbstractIdenticon
+{
+    protected function drawBlock($x, $y)
+    {
+        //parent::drawBlock($x, $y);
+        $this->image->draw()->dot(
+            $this->getCell($x, $y)->getCenter(),
+            $this->getColor()
+        );
+    }
+}
+```
+
 ## Unit tests
 
 For running tests you need [PHPUnit](http://www.phpunit.de).
