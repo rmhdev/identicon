@@ -34,4 +34,13 @@ class BasicTypeIdenticonTest extends AbstractTypeIdenticonTest
 
         $this->assertTrue($response->isClientError());
     }
+
+    public function testNonLowercaseFormat()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/identity.PNG");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isSuccessful());
+    }
 }
