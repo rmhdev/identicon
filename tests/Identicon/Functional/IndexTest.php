@@ -57,6 +57,7 @@ class IndexTest extends WebTestCase
         $crawler = $client->request("GET", "/");
         $form = $crawler->selectButton('generate')->form();
         $client->submit($form, array("name" => 'mytest'));
+        $client->followRedirect();
 
         $this->assertStringEndsWith("/mytest", $client->getHistory()->current()->getUri());
     }
