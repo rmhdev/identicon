@@ -13,5 +13,5 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
 ));
 
 $folder = __DIR__ . "/../config/";
-$file = file_exists($folder . "parameters.json") ? "parameters.json" : "parameters.json.dist";
+$file = file_exists($folder . "parameters.json") ? "parameters.json" : "parameters.dist.json";
 $app->register(new Igorw\Silex\ConfigServiceProvider($folder . $file), array());
