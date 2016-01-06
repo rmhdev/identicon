@@ -3,7 +3,7 @@
 Identicon generator inspired by Github's [Identicons](https://github.com/blog/1586-identicons) project.
 It is built with [Silex](http://silex.sensiolabs.org) and [Imagine](http://imagine.readthedocs.org).
 
-[![Build Status](https://travis-ci.org/rmhdev/identicon.png)](https://travis-ci.org/rmhdev/identicon)
+[![Build Status](https://travis-ci.org/rmhdev/identicon.svg)](https://travis-ci.org/rmhdev/identicon)
 
 **What is an identicon?** (from [wikipedia](http://en.wikipedia.org/wiki/Identicon))
 
@@ -39,25 +39,25 @@ Check the [latest release](https://github.com/rmhdev/identicon/releases) and cop
 ### Project dependencies
 
 Retrieve all the dependencies using [Composer](http://getcomposer.org/).
-Install it and then run the `update` command:
+Install it and then run the next command:
 
 ```bash
-./composer.phar update
+./composer.phar install --no-dev
 ```
 
 ## Server configuration
 
 You must configure your `vhost` and adjust the path to point to the `web/` folder.
 
-Don't forget to set the proper permissions on the `cache` folder:
+Don't forget to set the proper permissions on the `cache` and `logs` folders:
 
 ```bash
-chmod 777 cache/
+chmod 777 var/*
 ```
 
 ## Customize the identicon generator
 
-In the `config` folder, copy the file `parameters.json.dist` and paste it with the name `parameters.json`.
+In the `config` folder, copy the file `parameters.dist.json` and paste it with the name `parameters.json`.
 The default values are:
 
 ```javascript
