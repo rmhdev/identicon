@@ -11,16 +11,14 @@ use Imagine\Image\Color;
 
 abstract class AbstractIdenticon
 {
-    const
-        BLOCKS = 5,
-        MARGIN = 35,
-        BLOCK_SIZE = 70,
-        BACKGROUND_COLOR = "f0f0f0";
+    const BLOCKS = 5;
+    const MARGIN = 35;
+    const BLOCK_SIZE = 70;
+    const BACKGROUND_COLOR = "f0f0f0";
 
-    protected
-        $identity,
-        $image,
-        $options;
+    protected $identity;
+    protected $image;
+    protected $options;
 
     protected static $colorPalette = array(
         "AE6A5B", "AE945B", "9FAE5B", "75AE5B", "5BAE6A", "5BAE94", "5B9FAE", "5B75AE",
@@ -70,7 +68,7 @@ abstract class AbstractIdenticon
     protected function checkValueBackgroundColor($backgroundColor)
     {
         try {
-            $colorObject = new Color($backgroundColor);
+            new Color($backgroundColor);
         } catch (\Imagine\Exception\InvalidArgumentException $e) {
             throw new InvalidArgumentException($e);
         }
@@ -99,6 +97,9 @@ abstract class AbstractIdenticon
         return $imagine->create($box, $this->getBackgroundColor());
     }
 
+    /**
+     * @return number
+     */
     protected function calculateSize()
     {
         return ($this->getOption("margin") * 2) +
@@ -108,7 +109,7 @@ abstract class AbstractIdenticon
     protected function getOption($name)
     {
         if (!isset($this->options[$name])) {
-            return NULL;
+            return null;
         }
 
         return $this->options[$name];
@@ -181,5 +182,4 @@ abstract class AbstractIdenticon
             "margin" => $this->getOption("margin"),
         ));
     }
-
 }

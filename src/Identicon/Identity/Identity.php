@@ -7,12 +7,10 @@ use Identicon\Exception\InvalidArgumentException;
 
 class Identity
 {
-
-    protected
-        $name,
-        $options,
-        $hash,
-        $blocks;
+    private $name;
+    private $options;
+    private $hash;
+    private $blocks;
 
     public function __construct($name, $options = array())
     {
@@ -98,7 +96,7 @@ class Identity
         return $this->getOption("length");
     }
 
-    protected function getOption($name, $default = NULL)
+    protected function getOption($name, $default = null)
     {
         if (!isset($this->options[$name])) {
             return $default;
@@ -156,5 +154,4 @@ class Identity
     {
         return $this->name;
     }
-
 }

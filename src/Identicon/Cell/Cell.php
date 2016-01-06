@@ -6,10 +6,9 @@ use Imagine\Image\Point;
 
 class Cell
 {
-    protected
-        $x,
-        $y,
-        $options;
+    private $x;
+    private $y;
+    private $options;
 
     public function __construct($x, $y, $options = array())
     {

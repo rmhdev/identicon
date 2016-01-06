@@ -27,6 +27,4 @@ class Identicon extends AbstractIdenticon
             $cell->getWest()
         );
     }
-
-
 }

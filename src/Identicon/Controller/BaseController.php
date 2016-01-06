@@ -67,14 +67,14 @@ class BaseController
      * @param null $type
      * @return \Identicon\AbstractIdenticon
      */
-    protected function createIdenticon(Application $app, $name, $type = NULL)
+    protected function createIdenticon(Application $app, $name, $type = null)
     {
         if (!$type) {
             $type = $app["identicon.type"]["default"];
         }
         $class = sprintf('\Identicon\Type\%s\Identicon', ucfirst($type));
         if (!class_exists($class)) {
-            return NULL;
+            return null;
         }
 
         return new $class($name, $app["identicon.config"]);
