@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 /* @var \Silex\Application $app */
-$app = require __DIR__ . "/app.php";
+$app = require __DIR__ . "/prod.php";
 
 $app["identicon.config"] = array();
 $app["identicon.type"] = array_merge(

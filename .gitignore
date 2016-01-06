@@ -7,5 +7,5 @@ composer.phar
 !/var/cache/.gitkeep
 !/var/logs/.gitkeep
 /phpunit.xml
-/config/*
-!/config/*.dist
+/config/parameters.json
+
