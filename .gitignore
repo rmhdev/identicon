@@ -2,8 +2,10 @@ composer.phar
 /vendor
 /.idea
 .DS_Store
-/cache/*
-!/cache/.gitkeep
+/var/cache/*
+/var/logs/*
+!/var/cache/.gitkeep
+!/var/logs/.gitkeep
 /phpunit.xml
 /config/*
 !/config/*.dist
