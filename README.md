@@ -1,7 +1,8 @@
-# identicon
+# Identicon
 
-Identicon generator inspired by Github's [Identicons](https://github.com/blog/1586-identicons) project.
-It is built with [Silex](http://silex.sensiolabs.org) and [Imagine](http://imagine.readthedocs.org).
+PHP aplication that generates identicons.
+It is built with [Silex](http://silex.sensiolabs.org) and [Imagine](http://imagine.readthedocs.org), 
+and is inspired by Github's [Identicons](https://github.com/blog/1586-identicons) project.
 
 [![Build Status](https://travis-ci.org/rmhdev/identicon.svg)](https://travis-ci.org/rmhdev/identicon)
 
@@ -11,14 +12,16 @@ It is built with [Silex](http://silex.sensiolabs.org) and [Imagine](http://imagi
 identify a user of a computer system as a form of avatar while protecting
 the users' privacy.
 
-![Identicon demo](doc/identicon.png)
+## Example
 
-This project will help you to generate identicons for your users.
-For example, if you want to get `username`'s avatar, you only have to use the next URL:
+If you want to get `username`'s avatar, you only have to use the next URL:
 
 ```
 http://your-identicon-server/username.png
 ```
+The response of the app will be the next image: 
+
+![Identicon demo](doc/identicon.png)
 
 You can check the [online demo](http://identicon.rmhdev.net).
 
@@ -30,6 +33,7 @@ A. Clone it:
 
 ```bash
 git clone git@github.com:rmhdev/identicon.git /YOUR/FOLDER
+git checkout v1.0.0
 ```
 
 B. Download it:
@@ -42,18 +46,28 @@ Retrieve all the dependencies using [Composer](http://getcomposer.org/).
 Install it and then run the next command:
 
 ```bash
-./composer.phar install --no-dev
+php ./composer.phar install --no-dev
 ```
 
-## Server configuration
+### Server configuration
 
-You must configure your `vhost` and adjust the path to point to the `web/` folder.
+This project is built using [Silex](http://silex.sensiolabs.org).
+The official docs will give you more information about
+[how to configure your server](http://silex.sensiolabs.org/doc/web_servers.html). Some tips:
 
-Don't forget to set the proper permissions on the `cache` and `logs` folders:
+- the **document root** must point to the `identicon/web/` directory.
+- folders in `identicon/var/` must be **writable** by the web server.
+
+### Play with Identicon
+
+If you are using PHP 5.4+, its built-in web server will help you to play with this project:
 
 ```bash
-chmod 777 var/*
+cd identicon/
+php -S localhost:8080 -t web web/index.php
 ```
+
+Easy, right? Just open a browser and enter `http://localhost:8080`
 
 ## Customize the identicon generator
 
@@ -112,10 +126,15 @@ class Identicon extends AbstractIdenticon
 
 ## Unit tests
 
-For running tests you need [PHPUnit](http://www.phpunit.de).
-After installing it, you can run the tests with the next command:
+Check the [Travis page](https://travis-ci.org/rmhdev/identicon) to see the build status.
+If you want to run the tests by yourself, run the next command:
 
 ```bash
-./vendor/bin/phpunit
+php ./vendor/bin/phpunit
 ```
 
+If you don't have `phpunit` installed, run:
+
+```bash
+php ./composer.phar install --no-dev
+```
