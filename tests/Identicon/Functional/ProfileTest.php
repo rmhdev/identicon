@@ -14,7 +14,7 @@ class ProfileTest extends WebTestCase
     public function testLoadingProfilePage()
     {
         $client = $this->createClient();
-        $crawler = $client->request("GET", "/myidentity");
+        $client->request("GET", "/myidentity");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isSuccessful());
@@ -36,9 +36,7 @@ class ProfileTest extends WebTestCase
         return array(
             array("myidentity", "myidentity"),
             array("MyIdentity", "myidentity"),
-
-            //strange: doesn't work with uppercase special chars:
-            //array("IdËntificaÇióñ", "idëntificaçióñ"),
+            array("IdËntificaÇióñ", "idëntificaçióñ"),
         );
     }
 
