@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "311586803d65f16b12f3ff9a5af08255",
-    "content-hash": "4eb6ecb70cd11c49a6b60bb01be0c008",
+    "hash": "d44d1120b527b3af562a83ed847b28fe",
+    "content-hash": "5235f844dfecfefe7f9a1cbcd9dc7559",
     "packages": [
         {
             "name": "igorw/config-service-provider",

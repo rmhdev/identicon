@@ -12,11 +12,12 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
     'http_cache.esi'        => null
 ));
 
-$isDebug = isset($app['debug']) ? $app['debug'] : false;
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
-    'monolog.level' => $isDebug ? \Monolog\Logger::DEBUG : \Monolog\Logger::ERROR,
-    'monolog.logfile' =>  __DIR__ . "/../var/logs/" . ($isDebug ? 'dev.log' : 'prod.log'),
-));
+if (isset($app['debug']) && $app['debug']) {
+    $app->register(new Silex\Provider\MonologServiceProvider(), array(
+        'monolog.level' => \Monolog\Logger::DEBUG,
+        'monolog.logfile' =>  __DIR__ . "/../var/logs/dev.log",
+    ));
+}
 
 $folder = __DIR__ . "/../config/";
 $file = file_exists($folder . "parameters.json") ? "parameters.json" : "parameters.dist.json";
