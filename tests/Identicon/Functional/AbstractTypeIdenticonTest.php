@@ -11,7 +11,7 @@ abstract class AbstractTypeIdenticonTest extends WebTestCase
 {
     public function createApplication()
     {
-        return require __DIR__ . "/../../../config/test.php";
+        return require __DIR__ . "/../config/test.php";
     }
 
     public function setUp()
