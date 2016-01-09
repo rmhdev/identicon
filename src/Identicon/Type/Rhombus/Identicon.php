@@ -4,7 +4,6 @@ namespace Identicon\Type\Rhombus;
 
 use Identicon\AbstractIdenticon;
 use Identicon\IdenticonInterface;
-use Imagine\Image\Point;
 
 final class Identicon extends AbstractIdenticon implements IdenticonInterface
 {
