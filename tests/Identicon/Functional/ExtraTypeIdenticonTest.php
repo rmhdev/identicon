@@ -12,6 +12,7 @@ class ExtraTypeIdenticonTest extends AbstractTypeIdenticonTest
 
         $this->assertTrue($response->isSuccessful());
         $this->assertImageIsCorrect($response, "identity-plain.png");
+        $this->assertEquals('inline; filename="identity.png"', $response->headers->get("Content-Disposition"));
     }
 
     public function testTrianglePage()

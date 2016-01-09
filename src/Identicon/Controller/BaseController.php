@@ -48,8 +48,12 @@ class BaseController
         if (!$identicon || !$contentType) {
             return $this->createErrorResponse($app);
         }
+        $filename = $identicon->getIdentity()->getName() . ".{$format}";
 
-        return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => $contentType));
+        return $this->createResponse($request, $identicon->getContent(), array(
+            "Content-Type" => $contentType,
+            "Content-Disposition" => 'inline; filename="' . $filename . '"'
+        ));
     }
 
     protected function getContentType($format)
@@ -87,8 +91,12 @@ class BaseController
         if (!$identicon || !$contentType) {
             return $this->createErrorResponse($app);
         }
+        $filename = $identicon->getIdentity()->getName() . ".{$format}";
 
-        return $this->createResponse($request, $identicon->getContent(), array("Content-Type" => $contentType));
+        return $this->createResponse($request, $identicon->getContent(), array(
+            "Content-Type" => $contentType,
+            "Content-Disposition" => 'inline; filename="' . $filename . '"'
+        ));
     }
 
     public function profileAction(Request $request, Application $app, $name)

@@ -12,6 +12,7 @@ class BasicTypeIdenticonTest extends AbstractTypeIdenticonTest
 
         $this->assertTrue($response->isSuccessful());
         $this->assertImageIsCorrect($response, "identity.png");
+        $this->assertEquals('inline; filename="identity.png"', $response->headers->get("Content-Disposition"));
     }
 
     public function testCachedBasicIdenticonPage()
