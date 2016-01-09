@@ -1,18 +1,18 @@
 # Identicon
 
 PHP aplication that generates identicons.
-It is built with [Silex](http://silex.sensiolabs.org) and [Imagine](http://imagine.readthedocs.org), 
-and is inspired by Github's [Identicons](https://github.com/blog/1586-identicons) project.
+It is built with [Silex][] and [Imagine][], 
+and is inspired by Github's [Identicons][] project.
 
 [![Build Status](https://travis-ci.org/rmhdev/identicon.svg)](https://travis-ci.org/rmhdev/identicon)
 
-**What is an identicon?** (from [wikipedia](http://en.wikipedia.org/wiki/Identicon))
+**What is an identicon?** (from [wikipedia][])
 
 >It is a visual representation of a hash value [...] that serves to
 identify a user of a computer system as a form of avatar while protecting
 the users' privacy.
 
-## Example
+## How to use
 
 If you want to get `username`'s avatar, you only have to use the next URL:
 
@@ -23,7 +23,7 @@ The response of the app will be the next image:
 
 ![Identicon demo](doc/identicon.png)
 
-You can check the [online demo](http://identicon.rmhdev.net).
+You can check the [online demo][].
 
 ## Installation
 
@@ -32,17 +32,18 @@ Get the source code of the project from GitHub. You have two options:
 A. Clone it:
 
 ```bash
-git clone git@github.com:rmhdev/identicon.git /YOUR/FOLDER
+git clone git@github.com:rmhdev/identicon.git /MY/FOLDER
+cd /MY/FOLDER
 git checkout v1.0.0
 ```
 
 B. Download it:
 
-Check the [latest release](https://github.com/rmhdev/identicon/releases) and copy it to your installation folder.
+Check the [latest release][] and copy it to your installation folder.
 
 ### Project dependencies
 
-Retrieve all the dependencies using [Composer](http://getcomposer.org/).
+Retrieve all the dependencies using [Composer][].
 Install it and then run the next command:
 
 ```bash
@@ -51,9 +52,9 @@ php ./composer.phar install --no-dev
 
 ### Server configuration
 
-This project is built using [Silex](http://silex.sensiolabs.org).
+This project is built using [Silex][].
 The official docs will give you more information about
-[how to configure your server](http://silex.sensiolabs.org/doc/web_servers.html). Some tips:
+[how to configure your server][]. Some tips:
 
 - the **document root** must point to the `identicon/web/` directory.
 - folders in `identicon/var/` must be **writable** by the web server.
@@ -101,7 +102,7 @@ Plain, pyramid, circle and rhombus
 ### Create your own Identicons
 
 Take a look at `src/Identicon/Type/`. If you want to create a new Identicon type,
-add a new folder and extend the `AbstractIdenticon` class. For example:
+extend the `AbstractIdenticon` class. For example:
 
 ```php
 <?php
@@ -126,7 +127,7 @@ class Identicon extends AbstractIdenticon
 
 ## Unit tests
 
-Check the [Travis page](https://travis-ci.org/rmhdev/identicon) to see the build status.
+Check the [Travis page][] to see the build status.
 If you want to run the tests by yourself, run the next command:
 
 ```bash
@@ -136,5 +137,30 @@ php ./vendor/bin/phpunit
 If you don't have `phpunit` installed, run:
 
 ```bash
-php ./composer.phar install --no-dev
+php ./composer.phar install
 ```
+
+## Copyright and license
+
+Code and documentation copyright 2016 Rober Martín.
+Code released under [MIT license](LICENSE).
+Docs released under [Creative Commons CC BY 4.0][].
+
+This project is inspired by Github's [Identicons][] project.
+
+## Author
+
+My name is [Rober Martín][] ([@rmhdev][]). I'm a developer from Donostia / San Sebastián.
+
+[Imagine]: http://imagine.readthedocs.org 
+[wikipedia]: http://en.wikipedia.org/wiki/Identicon
+[online demo]: http://identicon.rmhdev.net
+[latest release]: https://github.com/rmhdev/identicon/releases
+[Composer]: http://getcomposer.org/
+[Silex]: http://silex.sensiolabs.org
+[how to configure your server]: http://silex.sensiolabs.org/doc/web_servers.html
+[Travis page]: https://travis-ci.org/rmhdev/identicon
+[Creative Commons CC BY 4.0]: http://creativecommons.org/licenses/by/4.0/
+[Identicons]: https://github.com/blog/1586-identicons
+[Rober Martín]: http://rmhdev.net/
+[@rmhdev]: http://twitter.com/rmhdev
