@@ -9,16 +9,16 @@ use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Color;
 
-abstract class AbstractIdenticon
+abstract class AbstractIdenticon implements IdenticonInterface
 {
     const BLOCKS = 5;
     const MARGIN = 35;
     const BLOCK_SIZE = 70;
     const BACKGROUND_COLOR = "f0f0f0";
 
-    protected $identity;
-    protected $image;
-    protected $options;
+    private $identity;
+    private $image;
+    private $options;
 
     protected static $colorPalette = array(
         "AE6A5B", "AE945B", "9FAE5B", "75AE5B", "5BAE6A", "5BAE94", "5B9FAE", "5B75AE",
@@ -85,7 +85,7 @@ abstract class AbstractIdenticon
 
     public function getContent()
     {
-        return $this->image->get("png", array("quality" => 0));
+        return $this->getImage()->get("png", array("quality" => 0));
     }
 
     protected function createImage()
@@ -95,6 +95,11 @@ abstract class AbstractIdenticon
         $box = new Box($size, $size);
 
         return $imagine->create($box, $this->getBackgroundColor());
+    }
+
+    protected function getImage()
+    {
+        return $this->image;
     }
 
     /**
@@ -140,7 +145,7 @@ abstract class AbstractIdenticon
     protected function drawBlock($x, $y)
     {
         $cell = $this->getCell($x, $y);
-        $this->image->draw()->polygon(
+        $this->getImage()->draw()->polygon(
             array(
                 $cell->getNorthWest(),
                 $cell->getNorthEast(),
@@ -167,12 +172,12 @@ abstract class AbstractIdenticon
 
     public function getWidth()
     {
-        return $this->image->getSize()->getWidth();
+        return $this->getImage()->getSize()->getWidth();
     }
 
     public function getHeight()
     {
-        return $this->image->getSize()->getHeight();
+        return $this->getImage()->getSize()->getHeight();
     }
 
     protected function getCell($x, $y)

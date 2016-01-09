@@ -3,14 +3,15 @@
 namespace Identicon\Type\Rhombus;
 
 use Identicon\AbstractIdenticon;
+use Identicon\IdenticonInterface;
 use Imagine\Image\Point;
 
-class Identicon extends AbstractIdenticon
+final class Identicon extends AbstractIdenticon implements IdenticonInterface
 {
     protected function drawBlock($x, $y)
     {
         parent::drawBlock($x, $y);
-        $this->image->draw()->polygon(
+        $this->getImage()->draw()->polygon(
             $this->calculateRhombusCoordinates($x, $y),
             $this->getColor()->lighten(10),
             true

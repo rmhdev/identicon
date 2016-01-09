@@ -3,24 +3,25 @@
 namespace Identicon\Type\Pyramid;
 
 use Identicon\AbstractIdenticon;
+use Identicon\IdenticonInterface;
 use Imagine\Image\Point;
 
-class Identicon extends AbstractIdenticon
+final class Identicon extends AbstractIdenticon implements IdenticonInterface
 {
     protected function drawBlock($x, $y)
     {
         parent::drawBlock($x, $y);
-        $this->image->draw()->polygon(
+        $this->getImage()->draw()->polygon(
             $this->calculateUpCoordinates($x, $y),
             $this->getColor()->lighten(10),
             true
         );
-        $this->image->draw()->polygon(
+        $this->getImage()->draw()->polygon(
             $this->calculateDownCoordinates($x, $y),
             $this->getColor()->lighten(5),
             true
         );
-        $this->image->draw()->polygon(
+        $this->getImage()->draw()->polygon(
             $this->calculateLeftCoordinates($x, $y),
             $this->getColor()->lighten(15),
             true

@@ -2,7 +2,7 @@
 
 namespace Identicon\Identity;
 
-class Block
+final class Block
 {
     protected $isColored;
 

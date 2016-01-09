@@ -4,7 +4,7 @@ namespace Identicon\Cell;
 
 use Imagine\Image\Point;
 
-class Cell
+final class Cell
 {
     private $x;
     private $y;
@@ -17,7 +17,7 @@ class Cell
         $this->options = $this->processOptions($options);
     }
 
-    protected function processOptions($options = array())
+    private function processOptions($options = array())
     {
         if (!isset($options["width"])) {
             $options["width"] = 10;
@@ -57,7 +57,7 @@ class Cell
         return $this->getOption("margin");
     }
 
-    protected function getOption($name, $default = 0)
+    private function getOption($name, $default = 0)
     {
         if (!isset($this->options[$name])) {
             return $default;
@@ -74,12 +74,12 @@ class Cell
         );
     }
 
-    protected function getStartX()
+    private function getStartX()
     {
         return ($this->getPositionX() * $this->getWidth()) + $this->getMargin();
     }
 
-    protected function getStartY()
+    private function getStartY()
     {
         return ($this->getPositionY() * $this->getHeight()) + $this->getMargin();
     }

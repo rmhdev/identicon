@@ -69,7 +69,7 @@ class BaseController
      * @param Application $app
      * @param $name
      * @param null $type
-     * @return \Identicon\AbstractIdenticon
+     * @return \Identicon\IdenticonInterface
      */
     protected function createIdenticon(Application $app, $name, $type = null)
     {

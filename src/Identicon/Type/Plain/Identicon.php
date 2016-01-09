@@ -3,9 +3,10 @@
 namespace Identicon\Type\Plain;
 
 use Identicon\AbstractIdenticon;
+use Identicon\IdenticonInterface;
 use Imagine\Image\Point;
 
-class Identicon extends AbstractIdenticon
+final class Identicon extends AbstractIdenticon implements IdenticonInterface
 {
 
 }

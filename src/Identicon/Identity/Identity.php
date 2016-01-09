@@ -5,7 +5,7 @@ namespace Identicon\Identity;
 use Identicon\Exception\OutOfBoundsException;
 use Identicon\Exception\InvalidArgumentException;
 
-class Identity
+final class Identity
 {
     private $name;
     private $options;
@@ -19,7 +19,7 @@ class Identity
         $this->initializeBlocks();
     }
 
-    protected function prepareOptions($options = array())
+    private function prepareOptions($options = array())
     {
         if (!isset($options["length"])) {
             $options["length"] = 5;
@@ -29,7 +29,7 @@ class Identity
         return $options;
     }
 
-    protected function processLength($length)
+    private function processLength($length)
     {
         if (!is_numeric($length)) {
             throw new InvalidArgumentException();
@@ -41,13 +41,13 @@ class Identity
         return (int) $length;
     }
 
-    protected function initializeIdentification($identification)
+    private function initializeIdentification($identification)
     {
         $this->name = mb_convert_case($identification, MB_CASE_LOWER, "UTF-8");
         $this->hash = sha1($this->name);
     }
 
-    protected function initializeBlocks()
+    private function initializeBlocks()
     {
         $this->blocks = array();
         for ($x = 0; $x < $this->getLength(); $x++) {
@@ -57,7 +57,7 @@ class Identity
         }
     }
 
-    protected function insertBlock($x, $y)
+    private function insertBlock($x, $y)
     {
         if (!isset($this->blocks[$y])) {
             $this->blocks[$y] = array();
@@ -65,23 +65,23 @@ class Identity
         $this->blocks[$y][$x] = $this->createBlock($x, $y);
     }
 
-    protected function createBlock($posX, $posY)
+    private function createBlock($posX, $posY)
     {
         return new Block($this->isPositionColored($posX, $posY));
     }
 
-    protected function isPositionColored($posX, $posY)
+    private function isPositionColored($posX, $posY)
     {
         // value is hexadecimal number: [0..7] [8..15]
         return $this->calculateValueForPosition($posX, $posY) >= 8 ? true : false;
     }
 
-    protected function calculateValueForPosition($posX, $posY)
+    private function calculateValueForPosition($posX, $posY)
     {
         return hexdec(substr($this->hash, $this->calculateCharPosition($posX, $posY), 1));
     }
 
-    protected function calculateCharPosition($posX, $posY)
+    private function calculateCharPosition($posX, $posY)
     {
         if ($posX >= $this->getLength() / 2) {
             $posX = $this->getLength() - $posX - 1;
@@ -96,7 +96,7 @@ class Identity
         return $this->getOption("length");
     }
 
-    protected function getOption($name, $default = null)
+    private function getOption($name, $default = null)
     {
         if (!isset($this->options[$name])) {
             return $default;
@@ -120,7 +120,7 @@ class Identity
         return $this->blocks[$posY][$posX];
     }
 
-    protected function isOutOfBounds($posX, $posY)
+    private function isOutOfBounds($posX, $posY)
     {
         return $posX < 0 || $posY < 0 || ($posX >= $this->getLength()) || ($posY >= $this->getLength());
     }
@@ -135,7 +135,7 @@ class Identity
         return implode("/", $printedRows);
     }
 
-    protected function printRow($x)
+    private function printRow($x)
     {
         $row = "";
         for ($col = 0; $col < $this->getLength(); $col++) {

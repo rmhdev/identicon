@@ -17,6 +17,9 @@ abstract class AbstractTypeIdenticonTest extends WebTestCase
     public function setUp()
     {
         parent::setUp();
+        if (file_exists($this->getTempDir())) {
+            rmdir($this->getTempDir());
+        }
         mkdir($this->getTempDir(), 0777, true);
     }
 
