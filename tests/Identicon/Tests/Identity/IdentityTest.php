@@ -31,7 +31,7 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
      */
     public function testLengthOutOfBoundsException($length)
     {
-        $identity = new Identity("name", array("length" => $length));
+        new Identity("name", array("length" => $length));
     }
 
     public function lengthOutOfBoundsProvider()
@@ -184,4 +184,11 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("idëntificaçióñ", $identityComplex->getName());
     }
 
+    /**
+     * @expectedException Identicon\Exception\OutOfBoundsException
+     */
+    public function testTooLongNameShouldThrowException()
+    {
+        new Identity(str_repeat("abcdefghij", 25) . "123456");
+    }
 }

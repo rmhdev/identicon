@@ -7,6 +7,8 @@ use Identicon\Exception\InvalidArgumentException;
 
 final class Identity
 {
+    const MAX_LENGTH = 255;
+
     private $name;
     private $options;
     private $hash;
@@ -43,7 +45,13 @@ final class Identity
 
     private function initializeIdentification($identification)
     {
-        $this->name = mb_convert_case($identification, MB_CASE_LOWER, "UTF-8");
+        $name = mb_convert_case($identification, MB_CASE_LOWER, "UTF-8");
+        if (self::MAX_LENGTH < mb_strlen($name)) {
+            throw new OutOfBoundsException(
+                sprintf('Identity name is too long (%d), max is %d', mb_strlen($name), self::MAX_LENGTH)
+            );
+        }
+        $this->name = $name;
         $this->hash = sha1($this->name);
     }
 
