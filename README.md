@@ -112,12 +112,12 @@ namespace Identicon\Type\MyType;
 use Identicon\AbstractIdenticon;
 use Imagine\Image\Point;
 
-class Identicon extends AbstractIdenticon
+class Identicon extends AbstractIdenticon implements IdenticonInterface
 {
     protected function drawBlock($x, $y)
     {
         //parent::drawBlock($x, $y);
-        $this->image->draw()->dot(
+        $this->getImage()->draw()->dot(
             $this->getCell($x, $y)->getCenter(),
             $this->getColor()
         );
