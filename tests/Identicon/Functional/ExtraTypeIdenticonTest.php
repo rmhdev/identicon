@@ -52,7 +52,7 @@ class ExtraTypeIdenticonTest extends AbstractTypeIdenticonTest
         $client->request("GET", "/identity/unknown.png");
         $response = $client->getResponse();
 
-        $this->assertTrue($response->isClientError());
+        $this->assertTrue($response->isClientError(), $response->getStatusCode());
     }
 
     public function testCachedExtraType()

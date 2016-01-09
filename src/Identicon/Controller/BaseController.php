@@ -2,6 +2,8 @@
 
 namespace Identicon\Controller;
 
+use Identicon\Exception\InvalidArgumentException;
+use Identicon\IdenticonFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Silex\Application;
@@ -43,9 +45,15 @@ class BaseController
 
     public function basicAction(Request $request, Application $app, $name, $format = "png")
     {
-        $identicon = $this->createIdenticon($app, $name);
-        $contentType = $this->getContentType($format);
-        if (!$identicon || !$contentType) {
+        return $this->createImageResponse($request, $app, $name, $format);
+    }
+
+    private function createImageResponse(Request $request, Application $app, $name, $format = "png", $type = null)
+    {
+        try {
+            $identicon = $this->createIdenticon($app, $name, $type);
+            $contentType = $this->getContentType($format);
+        } catch (\Exception $e) {
             return $this->createErrorResponse($app);
         }
         $filename = $identicon->getIdentity()->getName() . ".{$format}";
@@ -62,7 +70,7 @@ class BaseController
             return "image/png";
         }
 
-        return "";
+        throw new InvalidArgumentException(sprintf('Unsupported image type "%s"', $format));
     }
 
     /**
@@ -76,27 +84,13 @@ class BaseController
         if (!$type) {
             $type = $app["identicon.type"]["default"];
         }
-        $class = sprintf('\Identicon\Type\%s\Identicon', ucfirst($type));
-        if (!class_exists($class)) {
-            return null;
-        }
 
-        return new $class($name, $app["identicon.config"]);
+        return IdenticonFactory::create($type, $name, $app["identicon.config"]);
     }
 
     public function extraAction(Request $request, Application $app, $type, $name, $format = "png")
     {
-        $identicon = $this->createIdenticon($app, $name, $type);
-        $contentType = $this->getContentType($format);
-        if (!$identicon || !$contentType) {
-            return $this->createErrorResponse($app);
-        }
-        $filename = $identicon->getIdentity()->getName() . ".{$format}";
-
-        return $this->createResponse($request, $identicon->getContent(), array(
-            "Content-Type" => $contentType,
-            "Content-Disposition" => 'inline; filename="' . $filename . '"'
-        ));
+        return $this->createImageResponse($request, $app, $name, $format, $type);
     }
 
     public function profileAction(Request $request, Application $app, $name)
