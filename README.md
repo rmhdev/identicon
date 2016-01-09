@@ -34,7 +34,7 @@ A. Clone it:
 ```bash
 git clone git@github.com:rmhdev/identicon.git /MY/FOLDER
 cd /MY/FOLDER
-git checkout v1.0.0
+git checkout v2.0.0
 ```
 
 B. Download it:
